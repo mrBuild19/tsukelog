@@ -38,6 +38,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use devise
 gem 'devise'
+# deviseの日本語化
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 
 # 画像投稿用gem
 gem "refile", require: "refile/rails", github: 'manfe/refile'
