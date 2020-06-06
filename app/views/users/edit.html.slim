@@ -1,0 +1,17 @@
+.container
+  .row
+    h4
+      | プロフィール編集
+    = form_for(@user) do |f|
+      = attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x100"
+      br
+      = f.attachment_field :profile_image
+      p
+        | ユーザーネーム
+      = f.text_field :name
+      p
+        | 自己紹介
+      = f.text_area :introduction
+      br
+      = link_to 'キャンセル', user_path(@user)
+      = f.submit '変更を保存'
