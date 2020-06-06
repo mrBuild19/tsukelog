@@ -1,2 +1,13 @@
-h1 Posts#index
-p Find me in app/views/posts/index.html.slim
+p
+	| 更新順
+p
+	| 新着投稿
+p
+	| タイムライン
+
+- @posts.each do |post|
+	p = link_to post.title, post_path(post)
+	p = post.created_at
+
+p
+	| さらに表示
