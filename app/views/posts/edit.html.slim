@@ -1,2 +1,12 @@
-h1 Posts#edit
-p Find me in app/views/posts/edit.html.slim
+= form_with model: @post, local: true do |f|
+	.form-group
+		= f.label :title
+		= f.text_field :title, class: 'form-control'
+
+	.form-group
+		= f.label :text
+		= f.text_area :text, class: 'form-control'
+
+	p = link_to 'キャンセル', post_path
+
+	= f.submit nil, class: 'btn btn-primary'
