@@ -1,2 +1,17 @@
-h1 Posts#show
-p Find me in app/views/posts/show.html.slim
+p
+	| タイトル
+p = @post.title
+
+p
+	| 本文
+p = @post.text
+
+p = @post.user.name
+p = @post.created_at
+p = link_to '削除', post_path(@post)
+
+p
+	| コメントする
+
+h4
+	| コメント一覧
