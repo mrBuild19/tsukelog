@@ -39,6 +39,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Use devise
 gem 'devise'
 
+# 画像投稿用gem
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+# 画像加工用(サイズ調整など)gem
+gem "refile-mini_magick"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
