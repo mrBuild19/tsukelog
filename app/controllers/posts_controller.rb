@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
 
   def index
-  	@posts = Post.all
+    # タグ絞り込み
+    if params[:tag_name]
+      @posts = Post.tagged_with("#{params[:tag_name]}")
+    else
+      @posts = Post.all
+    end
   end
 
   def new
