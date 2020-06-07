@@ -9,7 +9,7 @@ p
 	p = link_to post.title, post_path(post)
 
 	- post.tag_list.each do |tag|
-		p.badge.badge.badge-primary.mr-1.p-2= tag
+		p.badge.badge-primary.mr-1.p-2= tag
 
   	- post.post_images.each do |image|
     	p = attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200"
