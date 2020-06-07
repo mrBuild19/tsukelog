@@ -1,3 +1,5 @@
+- @post.post_images.each do |image|
+  = attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200"
 p
 	| タイトル
 p = @post.title

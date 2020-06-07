@@ -7,4 +7,8 @@
 		= f.label :text
 		= f.text_area :text, class: 'form-control'
 
+	.form-group
+		= f.label :post_images_post_images
+		= f.attachment_field :post_images_post_images, multiple: true, class: 'form-control'
+
 	= f.submit nil, class: 'btn btn-primary'

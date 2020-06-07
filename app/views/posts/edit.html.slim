@@ -1,5 +1,11 @@
 = form_with model: @post, local: true do |f|
 	.form-group
+		= f.label :post_images_post_images
+		- @post.post_images.each do |image|
+  			= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200"
+		= f.attachment_field :post_images_post_images, multiple: true, class: 'form-control'
+
+	.form-group
 		= f.label :title
 		= f.text_field :title, class: 'form-control'
 
