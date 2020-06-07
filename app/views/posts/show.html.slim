@@ -12,10 +12,21 @@ p = link_to '投稿編集', edit_post_path(@post), class: 'btn btn-primary'
 
 p = @post.user.name
 p = @post.created_at
+p
+	| コメント
+	= @post.post_comments.count
+	| 件
 p = link_to '削除', @post, method: :delete, class: 'btn btn-danger'
 
-p
-	| コメントする
+= form_with model: [@post, @comment] do |f|
+	= f.text_field :comment
+	= f.submit 'コメントする'
 
 h4
 	| コメント一覧
+
+- @post.post_comments.each do |post_comment|
+	li
+		= post_comment
+		= post_comment.user.name
+		= post_comment.created_at
