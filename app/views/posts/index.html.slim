@@ -1,0 +1,18 @@
+p
+	| 更新順
+p
+	| 新着投稿
+p
+	| タイムライン
+
+- @posts.each do |post|
+	p = link_to post.title, post_path(post)
+
+  	- post.post_images.each do |image|
+    	= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200"
+
+	p = post.user.name
+	p = post.created_at
+
+p
+	| さらに表示

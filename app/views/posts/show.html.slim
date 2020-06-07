@@ -1,0 +1,21 @@
+- @post.post_images.each do |image|
+  = attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200"
+p
+	| タイトル
+p = @post.title
+
+p
+	| 本文
+p = @post.text
+
+p = link_to '投稿編集', edit_post_path(@post), class: 'btn btn-primary'
+
+p = @post.user.name
+p = @post.created_at
+p = link_to '削除', @post, method: :delete, class: 'btn btn-danger'
+
+p
+	| コメントする
+
+h4
+	| コメント一覧
