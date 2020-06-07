@@ -16,6 +16,14 @@ p
 	| コメント
 	= @post.post_comments.count
 	| 件
+
+-if @post.liked_by?(current_user)
+	= link_to 'いいね削除', post_likes_path(@post), method: :delete
+ 	= @post.likes.count
+- else
+	= link_to 'いいね', post_likes_path(@post), method: :post
+	= @post.likes.count
+
 p = link_to '削除', @post, method: :delete, class: 'btn btn-danger'
 
 = form_with model: [@post, @comment] do |f|
