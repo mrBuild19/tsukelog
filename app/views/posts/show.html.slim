@@ -27,6 +27,7 @@ h4
 
 - @post.post_comments.each do |post_comment|
 	li
-		= post_comment
+		= post_comment.comment
 		= post_comment.user.name
 		= post_comment.created_at
+		= link_to '削除', post_post_comment_path(@post, post_comment), method: :delete, class: 'btn btn-danger'
