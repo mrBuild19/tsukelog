@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   def index
     @search = Post.ransack(params[:q])
+    @tags = ActsAsTaggableOn::Tag.all
 
     # タグ絞り込み
     if params[:tag_name]

@@ -2,6 +2,12 @@
 	= f.label :title_or_text, "Keyword"
 	= f.search_field :title_or_text_or_user_name_cont
 	= f.submit '検索'
+
+- @tags.each do |tag|
+	p.badge.badge-primary.mr-1.p-2
+		= link_to tag.name, posts_path(tag_name: tag.name), class: "text-white"
+
+
 p
 	| 更新順
 p
