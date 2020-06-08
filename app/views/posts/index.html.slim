@@ -1,3 +1,13 @@
+= search_form_for @search do |f|
+	= f.label :title_or_text, "Keyword"
+	= f.search_field :title_or_text_or_user_name_cont
+	= f.submit '検索'
+
+= form_with url: posts_path, local: true, method: :get do |f|
+	= f.select :tag_name, @tags
+	= f.submit '送信'
+
+
 p
 	| 更新順
 p
