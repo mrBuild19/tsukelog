@@ -1,8 +1,27 @@
 .container
   .row
     = attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x100"
+
     p
       = @user.name
-    = link_to 'プロフィール編集', edit_user_path(@user)
+
+    - if @user.id == current_user.id
+    	= link_to 'プロフィール編集', edit_user_path(@user)
+    - else
+    	- if current_user.following?(@user)
+    		= link_to "フォロー外す", unfollow_path(@user.id), method: :post
+    	- else
+    		= link_to "フォローする", follow_path(@user.id), method: :post
+
     p
       = @user.introduction
+
+    p
+    	|
+    		フォロー数
+    = @user.follower.count
+
+    p
+    	|
+    		フォロワー数
+    = @user.followed.count
