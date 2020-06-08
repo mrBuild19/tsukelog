@@ -1,9 +1,13 @@
 class PostsController < ApplicationController
 
   def index
+    @search = Post.ransack(params[:q])
+
     # タグ絞り込み
     if params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}")
+    elsif @search
+      @posts = @search.result
     else
       @posts = Post.all
     end
