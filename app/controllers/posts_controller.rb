@@ -10,11 +10,9 @@ class PostsController < ApplicationController
 
     # タグ絞り込み
     if params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}")
-    elsif @search
-      @posts = @search.result
+      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page])
     else
-      @posts = Post.all
+      @posts =  @search.result.page(params[:page])
     end
   end
 
