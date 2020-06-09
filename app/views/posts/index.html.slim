@@ -30,3 +30,16 @@ p
 
 p
 	| さらに表示
+
+- @follow_posts.each do |post|
+	p = link_to post.title, post_path(post)
+
+	- post.tag_list.each do |tag|
+		p.badge.badge-primary.mr-1.p-2
+			= link_to tag, posts_path(tag_name: tag), class: "text-white"
+
+  	- post.post_images.each do |image|
+    	p = attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200"
+
+	p = post.user.name
+	p = post.created_at

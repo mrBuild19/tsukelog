@@ -3,6 +3,10 @@ class PostsController < ApplicationController
   def index
     @search = Post.ransack(params[:q])
     @tags = ActsAsTaggableOn::Tag.all
+    # フォローユーザー取得
+    follow_users = current_user.following_user
+    # フォローユーザーの投稿
+    @follow_posts = Post.where(user_id: follow_users)
 
     # タグ絞り込み
     if params[:tag_name]
