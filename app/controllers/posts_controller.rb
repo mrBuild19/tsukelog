@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     # フォローユーザー取得
     follow_users = current_user.following_user
     # フォローユーザーの投稿
-    @follow_posts = Post.where(user_id: follow_users)
+    @follow_posts = Post.where(user_id: follow_users).page(params[:page])
 
     # タグ絞り込み
     if params[:tag_name]
