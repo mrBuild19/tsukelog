@@ -11,7 +11,7 @@ html
     header
       .navbar.navbar-expand-md.navbar-light.bg-light
         .navbar-brand.mr-auto
-          .border つけログ
+          = link_to 'つけログ', root_path, class: "border"
 
         - if user_signed_in?
           .ul.nav.navbar-nav.mr-auto

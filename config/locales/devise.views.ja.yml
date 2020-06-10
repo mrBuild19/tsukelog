@@ -2,6 +2,7 @@ ja:
   activerecord:
     attributes:
       user:
+        name: "ユーザーネーム"
         current_password: "現在のパスワード"
         email: "メールアドレス"
         password: "パスワード"
@@ -49,10 +50,11 @@ ja:
         update: "更新"
         we_need_your_current_password_to_confirm_your_changes: "変更を反映するには現在のパスワードを入力してください"
       new:
-        sign_up: "アカウント登録"
+        sign_up: "新規登録"
+        characters minimum: "文字以上"
     sessions:
       new:
-        sign_in: "ログイン"
+        sign in: "ログイン"
     shared:
       links:
         back: "戻る"
@@ -61,7 +63,7 @@ ja:
         forgot_your_password: "パスワードを忘れましたか?"
         sign_in: "ログイン"
         sign_in_with_provider: "%{provider}でログイン"
-        sign_up: "アカウント登録"
+        sign_up: "新規登録"
     unlocks:
       new:
         resend_unlock_instructions: "アカウントの凍結解除方法を再送する"
