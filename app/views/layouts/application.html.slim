@@ -10,7 +10,8 @@ html
   body
     header
       .navbar.navbar-expand-md.navbar-light.bg-light
-        .navbar-brand.mr-auto TsukeLog
+        .navbar-brand.mr-auto
+          .border つけログ
 
         - if user_signed_in?
           .ul.nav.navbar-nav.mr-auto
@@ -25,7 +26,7 @@ html
             nav-item = link_to '新規投稿', new_post_path, class: "nav-link border rounded"
             nav-item = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link border rounded"
           = search_form_for @search do |f|
-            = f.search_field :title_or_text_or_user_name_cont, class: "form-control"
+            = f.search_field :title_or_text_or_user_name_cont, class: "form-control", placeholder: "Search"
             = f.submit '検索', class: "btn btn-success"
 
         - else
