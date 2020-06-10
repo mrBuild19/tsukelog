@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
 
   def index
-    @search = Post.ransack(params[:q])
     @tags = ActsAsTaggableOn::Tag.all
     # フォローユーザー取得
     follow_users = current_user.following_user
