@@ -3,6 +3,12 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    # タグ絞り込み
+    if params[:tag_name]
+      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page])
+    else
+      @posts =  @user.posts.page(params[:page])
+    end
   end
 
   def edit

@@ -9,17 +9,33 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     header
-      nav.navbar.navbar-expand.navbar-dark.bg-dark.fixed-top
+      .navbar.navbar-expand-md.navbar-light.bg-light
+        .navbar-brand.mr-auto
+          = link_to 'つけログ', root_path, class: "border"
+
         - if user_signed_in?
-          ul.navbar-nav.ml-auto
-            li.nav-item
-              = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link"
+          .ul.nav.navbar-nav.mr-auto
+            p
+              | ようこそ、
+              = current_user.name
+              | さん!
+
+          .ul.nav.navbar-nav
+            nav-item = link_to 'マイページ', user_path(current_user.id), class: "nav-link border rounded"
+            nav-item = link_to '投稿一覧', posts_path, class: "nav-link border rounded　p-auto"
+            nav-item = link_to '新規投稿', new_post_path, class: "nav-link border rounded"
+            nav-item = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link border rounded"
+          = search_form_for @search do |f|
+            = f.search_field :title_or_text_or_user_name_cont, class: "form-control", placeholder: "Search"
+            = f.submit '検索', class: "btn btn-success"
+
         - else
-          ul.navbar-nav.ml-auto
-            li.nav-item
-              = link_to 'サインアップ', new_user_registration_path, class: "nav-link"
-            li.nav-item
-              = link_to 'ログイン', new_user_session_path, class: "nav-link"
+          .ul.nav.navbar-nav
+            / TODO 投稿一覧に飛ぶとfollowing_userが定義出来ず、エラー発生
+            nav-item = link_to '投稿一覧', posts_path, class: "nav-link border rounded"
+            nav-item = link_to '新規登録', new_user_registration_path, class: "nav-link border rounded"
+            nav-item = link_to 'ログイン', new_user_session_path, class: "nav-link border rounded"
+
     p.notice
       = notice
     p.alert

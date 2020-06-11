@@ -60,15 +60,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-  #ログイン後のリダイレクト先
-  def after_sign_in_path_for(resource)
-    # TODO
-    root_path
-  end
-
-  #ログアウト後のリダイレクト先
-  def after_sign_out_path_for(resource)
-    # TODO
-    root_path
+  #アカウント登録後のリダイレクト先
+  def after_sign_up_path_for(resource)
+    posts_path
   end
 end

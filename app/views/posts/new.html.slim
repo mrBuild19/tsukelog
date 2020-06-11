@@ -1,18 +1,21 @@
-= form_with model: @post, local: true do |f|
-	.form-group
-		= f.label :title
-		= f.text_field :title, class: 'form-control'
+.container
+	.row
+		= form_with model: @post, local: true do |f|
+			.post-left
+				.form-group
+					= f.attachment_field :post_images_post_images, multiple: true, class: 'form-control'
 
-	.form-group
-		= f.label :tag_list
-		= f.text_area :tag_list, value: @post.tag_list.join(','), class: 'form-control'
+			.post-right
+				.form-group
+					= f.label :title
+					= f.text_field :title, class: 'form-control'
 
-	.form-group
-		= f.label :text
-		= f.text_area :text, class: 'form-control'
+				.form-group
+					= f.label :tag_list
+					= f.text_area :tag_list, value: @post.tag_list.join(','), class: 'form-control'
 
-	.form-group
-		= f.label :post_images_post_images
-		= f.attachment_field :post_images_post_images, multiple: true, class: 'form-control'
+				.form-group
+					= f.label :text
+					= f.text_area :text, class: 'form-control'
 
-	= f.submit nil, class: 'btn btn-primary'
+			= f.submit nil, class: 'btn btn-primary'
