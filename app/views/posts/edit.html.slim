@@ -5,8 +5,7 @@
 			.form-group
 			- @post.post_images.each do |image|
 	  			= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200"
-	  		br
-			= f.attachment_field :post_images_post_images, multiple: true, class: 'form-control'
+			= f.attachment_field :post_images_post_images, multiple: true, class: 'form-control-file'
 
 			.post-right.media-body
 			.form-group
@@ -23,5 +22,4 @@
 
 			br
 			= link_to 'キャンセル', post_path
-
 			= f.submit '変更を保存', class: 'btn btn-primary'

@@ -38,9 +38,9 @@
 			    		p
 			    			= post.user.name
 			    			= post.created_at
-	br
 
 	= link_to_next_page @posts, '次のページ', class: "d-none next"
+	br
 
 .jscroll
 	.row
@@ -64,6 +64,6 @@
 			    		p
 			    			= link_to post.user.name, user_path(post.user)
 			    			= post.created_at
-	br
 
 	= link_to_next_page @posts, '次のページ', class: "d-none next"
+	br
