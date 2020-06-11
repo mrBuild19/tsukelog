@@ -4,19 +4,16 @@
             = attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x100"
 
         .post-right.media-body
-            p
-              = @user.name
+            p = @user.name
 
-            - if @user.id == current_user.id
-            	= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary'
+            - if user_signed_in? && @user != current_user
+                <div class="follow_#{@user.id}">
+                = render "users/follow_form", user: @user
             - else
-            	- if current_user.following?(@user)
-            		= link_to 'フォロー外す', unfollow_path(@user.id), method: :post, class: 'btn btn-outline-primary'
-            	- else
-            		= link_to 'フォローする', follow_path(@user.id), method: :post, class: 'btn btn-outline-primary'
+                = link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary'
 
-            p
-              = @user.introduction
+            p = @user.introduction
+    br
 
     .row
         ul.nav.nav-tabs
