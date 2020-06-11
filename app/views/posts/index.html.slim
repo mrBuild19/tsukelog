@@ -5,13 +5,16 @@
 			= f.submit '送信'
 
 	.row
-		p
-			| 更新順
+		= form_with url: posts_path, local: true do |f|
+			= f.select :sort_item, [["登録日順", 1], ["いいねの多い順", 2]], {}, class: "btn btn-outline-primary dropdown-toggle"
+
 	.row
-		p
-			| 新着投稿
-		p
-			| タイムライン
+		ul.nav.nav-tabs
+			li.nav-item
+				= link_to '新着投稿', posts_path, class:"nav-link active"
+			li.nav-item
+				= link_to 'タイムライン', posts_path, class:"nav-link"
+	br
 
 .jscroll
 	.row
@@ -35,6 +38,7 @@
 			    		p
 			    			= post.user.name
 			    			= post.created_at
+	br
 
 	= link_to_next_page @posts, '次のページ', class: "d-none next"
 
@@ -58,7 +62,8 @@
 			    .card-footer
 			    	.card-text
 			    		p
-			    			= post.user.name
+			    			= link_to post.user.name, user_path(post.user)
 			    			= post.created_at
+	br
 
 	= link_to_next_page @posts, '次のページ', class: "d-none next"
