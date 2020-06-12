@@ -27,28 +27,20 @@
 					= @post.post_comments.count
 					| 件
 
-				-if @post.liked_by?(current_user)
-					= link_to post_likes_path(@post), method: :delete, style:"color:red;" do
-						= icon 'fas', 'heart'
-				 	= @post.likes.count
-				- else
-					= link_to post_likes_path(@post), method: :post, style:"color:red;" do
-						= icon 'far', 'heart'
-					= @post.likes.count
+				<div class="post_#{@post.id}">
+				= render "likes/like", post: @post
 
-				= link_to '削除', @post, method: :delete, class: 'btn btn-danger'
-
+	.row
 		.post-to-edit
 			li.list-unstyled
+				= link_to '削除', @post, method: :delete, class: 'btn btn-danger'
 				= link_to '投稿編集', edit_post_path(@post), class: 'btn btn-primary'
 	br
 	br
 
 
 	.row
-		= form_with model: [@post, @comment] do |f|
-			= f.text_field :comment
-			= f.submit 'コメントする', class: "btn btn-warning"
+		= render "comment_form", post: @post, comment: @comment
 	br
 
 	.row
@@ -57,9 +49,5 @@
 	br
 
 	.row
-		- @post.post_comments.each do |post_comment|
-			li.list-unstyled
-				= post_comment.comment
-				= post_comment.user.name
-				= post_comment.created_at
-				= link_to '削除', post_post_comment_path(@post, post_comment), method: :delete, class: 'btn btn-danger'
+		<div class="comment_index">
+		= render "comment_index", post: @post
