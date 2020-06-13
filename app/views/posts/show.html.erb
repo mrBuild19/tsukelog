@@ -1,0 +1,59 @@
+<div class="container">
+	<div class="row media">
+		<div class="post-left d-flex mr-3">
+			<% @post.post_images.each do |image| %>
+				<%= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200" %>
+			<% end %>
+		</div>
+
+		<div class="post-right media-body">
+			<p>タイトル</p>
+			<p><%= @post.title %></p>
+			<% @post.tag_list.each do |tag| %>
+				<p class="badge badge-primary mr-1 p-2">
+					<%= link_to tag, posts_path(tag_name: tag), class: "text-white" %>
+				</p>
+			<% end %>
+			<p>本文</p>
+			<p><%= @post.text %></p>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="post-status">
+			<li class="list-unstyled">
+				<%= @post.user.name %>
+				<%= @post.created_at %>
+				<span>コメント<%= @post.post_comments.count %> 件</span>
+
+				<div class="post_<%= @post.id %>">
+					<%= render "likes/like", post: @post %>
+				</div>
+			</li>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="post-to-edit">
+			<li class="list-unstyled">
+				<%= link_to '削除', @post, method: :delete, class: 'btn btn-danger' %>
+				<%= link_to '投稿編集', edit_post_path(@post), class: 'btn btn-primary' %>
+			</li>
+		</div>
+	</div>
+	<br>
+	<br>
+	<div class="row">
+		<%= render "comment_form", post: @post, comment: @comment %>
+	</div>
+	<br>
+	<div class="row">
+		<h4>コメント一覧</h4>
+	</div>
+	<br>
+	<div class="row">
+		<div class="comment_index">
+			<%= render "comment_index", post: @post %>
+		</div>
+	</div>
+</div>

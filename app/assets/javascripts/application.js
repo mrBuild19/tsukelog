@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery.jscroll.min.js
+//= require bootstrap.min.js
 
 $(document).on('turbolinks:load', function() {
   $('.jscroll').jscroll({

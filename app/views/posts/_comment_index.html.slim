@@ -1,7 +1,0 @@
-- post.post_comments.each do |post_comment|
-	li.list-unstyled
-		= post_comment.comment
-		= post_comment.user.name
-		= post_comment.created_at
-		- if post_comment.user == current_user
-			= link_to '削除', post_post_comment_path(post, post_comment), method: :delete, remote: true, class: 'btn btn-danger'

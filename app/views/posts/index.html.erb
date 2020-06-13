@@ -1,0 +1,106 @@
+<div class="container">
+	<div class="row">
+		<%= form_with url: posts_path, local: true, method: :get do |f| %>
+			<%= f.select :tag_name, @tags %>
+			<%= f.submit '送信' %>
+		<% end %>
+	</div>
+
+	<div class="row">
+		<%= form_with url: posts_path, local: true do |f| %>
+			<%= f.select :sort_item, [["登録日順", 1], ["いいねの多い順", 2]], {}, class: "btn btn-outline-primary dropdown-toggle" %>
+		<% end %>
+	</div>
+	<div class="row">
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<%= link_to '新着投稿', posts_path, class:"nav-link active" %>
+			</li>
+			<li class="nav-item">
+				<%= link_to 'タイムライン', posts_path, class:"nav-link" %>
+			</li>
+		</ul>
+	</div>
+	<br>
+
+	<div class="jscroll">
+	<div class="row">
+		<% @posts.each do |post| %>
+			<div class="card col-4">
+				<div class="card-header">
+					<p class="card-title">
+						<%= link_to post.title, post_path(post) %>
+					</p>
+				</div>
+
+				<div class="card-body">
+					<div class="card-subtitle">
+						<% post.tag_list.each do |tag| %>
+							<p class="badge badge-primary mr-1 p-2">
+								<%= link_to tag, posts_path(tag_name: tag), class: "text-white" %>
+							</p>
+						<% end %>
+					</div>
+					<div class="img" alt="Card image">
+						<% post.post_images.each do |image| %>
+							<p><%= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200" %>
+							</p>
+						<% end %>
+					</div>
+				</div>
+
+				<div class="card-footer">
+					<div class="card-text">
+						<p>
+							<%= post.user.name %>
+							<%= post.created_at %>
+						</p>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<%= link_to_next_page @posts, '次のページ', class: "d-none next" %>
+	</div>
+	<br>
+	<div class="jscroll">
+	<div class="row">
+		<% @follow_posts.each do |post| %>
+			<div class="card col-4">
+				<div class="card-header">
+					<p class="card-title">
+						<%= link_to post.title, post_path(post) %>
+					</p>
+				</div>
+
+				<div class="card-body">
+					<div class="card-subtitle">
+						<% post.tag_list.each do |tag| %>
+							<p class="badge badge-primary mr-1 p-2">
+								<%= link_to tag, posts_path(tag_name: tag), class: "text-white" %>
+							</p>
+						<% end %>
+					</div>
+					<div class="img" alt="Card image">
+						<% post.post_images.each do |image| %>
+							<p>
+								<%= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200" %>
+							</p>
+						<% end %>
+					</div>
+				</div>
+				<div class="card-footer">
+					<div class="card-text">
+						<p>
+							<%= link_to post.user.name, user_path(post.user) %>
+							<%= post.created_at %>
+						</p>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<%= link_to_next_page @posts, '次のページ', class: "d-none next" %>
+	</div>
+	<br>
+</div>
