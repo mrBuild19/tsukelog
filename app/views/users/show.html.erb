@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row media">
+    <div class="post-left d-flex mr-3">
+      <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x100" %>
+    </div>
+    <div class="post-right media-body">
+      <p><%= @user.name %></p>
+      <% if user_signed_in? && @user != current_user %>
+        <div class="follow_<%= @user.id %>">
+          <%= render "users/follow_form", user: @user %>
+        </div>
+      <% else %>
+        <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary' %>
+      <% end %>
+        <p><%= @user.introduction %></p>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <%= link_to '投稿', posts_path, class:"nav-link active" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "フォロー #{@user.follower.count}", posts_path, class:"nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "フォロワー #{@user.followed.count}", posts_path, class:"nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "いいね #{@user.likes.count}", posts_path, class:"nav-link" %>
+      </li>
+    </ul>
+  </div>
+  <br />
+
+  <div class="jscroll">
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="col-4 card">
+          <div class="card-header">
+            <p class="card-title"><%= link_to post.title, post_path(post) %></p>
+          </div>
+
+          <div class="card-body">
+            <div class="card-subtitle">
+              <% post.tag_list.each do |tag| %>
+                <p class="badge badge-primary mr-1 p-2">
+                  <%= link_to tag, posts_path(tag_name: tag), class: "text-white" %>
+                </p>
+              <% end %>
+            </div>
+            <div alt="Card image" class="img">
+              <% post.post_images.each do |image| %>
+                <p>
+                  <%= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200" %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-text">
+              <p>
+                <%= post.user.name %>
+                  <%= post.created_at %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+    <%= link_to_next_page @posts, '次のページ', class: "d-none next" %>
+  <br>
+</div>

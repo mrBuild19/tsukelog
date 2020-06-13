@@ -1,0 +1,7 @@
+<% if post.liked_by?(current_user) %>
+	<%= link_to "いいね消す", post_likes_path(post), method: :delete, remote: true %>
+	<%= post.likes.count %>
+<% else %>
+	<%= link_to "いいね", post_likes_path(post), method: :post, remote: true %>
+	<%= post.likes.count %>
+<% end %>
