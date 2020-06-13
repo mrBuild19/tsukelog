@@ -50,9 +50,6 @@ gem "refile-mini_magick"
 # Bootstrap
 gem 'bootstrap', '~> 4.5.0'
 
-# Slim
-gem 'slim-rails'
-gem 'html2slim'
 
 gem 'font-awesome-sass', '~> 5.13.0'
 
