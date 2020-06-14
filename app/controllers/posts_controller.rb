@@ -6,6 +6,8 @@ class PostsController < ApplicationController
     follow_users = current_user.following_user
     # フォローユーザーの投稿
     @follow_posts = Post.where(user_id: follow_users).page(params[:page])
+    @search = Post.ransack(params[:q])
+    @popular = Post.page(params[:page]).left_joins(:likes).group('posts.id').order('count(likes.post_id) DESC')
 
     # タグ絞り込み
     if params[:tag_name]

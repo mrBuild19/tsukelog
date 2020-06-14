@@ -33,12 +33,6 @@
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link border rounded" %>
           </nav-item>
         </ul>
-
-        <%= search_form_for @search do |f| %>
-          <%= f.search_field :title_or_text_or_user_name_cont, class: "form-control", placeholder: "Search" %>
-          <%= f.submit '検索', class: "btn btn-success" %>
-        <% end %>
-
       <% else %>
         <ul class="nav navbar-nav">
           <nav-item>
