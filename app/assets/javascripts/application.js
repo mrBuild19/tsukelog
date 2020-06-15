@@ -19,11 +19,84 @@
 //= require bootstrap.min.js
 
 $(document).on('turbolinks:load', function() {
-  $('.jscroll').jscroll({
+  $('.timeline-jscroll').jscroll({
+  	autoTrigger: false,
     // 無限に追加する要素は、どこに入れる？
-    contentSelector: '.jscroll',
+    contentSelector: '.timeline-jscroll',
     // 次のページにいくためのリンクの場所は？ ＞aタグの指定
-    nextSelector: 'a.next',
+    nextSelector: 'a.timeline-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
+
+$(document).on('turbolinks:load', function() {
+  $('.arrival-jscroll').jscroll({
+  	autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.arrival-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.arrival-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
+
+$(document).on('turbolinks:load', function() {
+  $('.popular-jscroll').jscroll({
+  	autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.popular-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.popular-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
+
+$(document).on('turbolinks:load', function() {
+  $('.my_postr-jscroll').jscroll({
+    autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.my_postr-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.my_postr-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
+
+$(document).on('turbolinks:load', function() {
+  $('.follow-jscroll').jscroll({
+    autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.follow-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.follow-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
+
+$(document).on('turbolinks:load', function() {
+  $('.follower-jscroll').jscroll({
+    autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.follower-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.follower-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
+
+$(document).on('turbolinks:load', function() {
+  $('.like-jscroll').jscroll({
+    autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.like-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.like-next',
     // 読み込み中の表示はどうする？
     loadingHtml: '読み込み中'
   });

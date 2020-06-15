@@ -1,14 +1,17 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @users = User.where.not(id: current_user)
+    @search = Post.ransack(params[:q])
+  end
+
   def show
   	@user = User.find(params[:id])
-    # タグ絞り込み
-    if params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page])
-    else
-      @posts =  @user.posts.page(params[:page])
-    end
+    @my_posts =  @user.posts.page(params[:page]).order(created_at: "DESC")
+    @follow_users = @user.following_user.page(params[:page])
+    @follower_users = @user.followers_user.page(params[:page])
+    @like_posts = @user.likes.page(params[:page])
   end
 
   def edit

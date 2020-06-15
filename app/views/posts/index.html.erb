@@ -1,106 +1,71 @@
 <div class="container">
 	<div class="row">
-		<%= form_with url: posts_path, local: true, method: :get do |f| %>
-			<%= f.select :tag_name, @tags %>
-			<%= f.submit '送信' %>
-		<% end %>
-	</div>
+		<%= search_form_for @search do |f| %>
+        <%= f.search_field :title_or_text_or_user_name_cont, class: "form-control", placeholder: "Search" %>
+        <%= f.submit '検索', class: "btn btn-success" %>
+     <% end %>
+   </div>
 
 	<div class="row">
-		<%= form_with url: posts_path, local: true do |f| %>
-			<%= f.select :sort_item, [["登録日順", 1], ["いいねの多い順", 2]], {}, class: "btn btn-outline-primary dropdown-toggle" %>
-		<% end %>
-	</div>
-	<div class="row">
-		<ul class="nav nav-tabs">
-			<li class="nav-item">
-				<%= link_to '新着投稿', posts_path, class:"nav-link active" %>
-			</li>
-			<li class="nav-item">
-				<%= link_to 'タイムライン', posts_path, class:"nav-link" %>
-			</li>
+		<ul class="nav nav-pills nav-fill" role="tablist">
+		  <li class="nav-item">
+		    <a class="nav-link active" id="timeline-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="timeline" aria-selected="true">タイムライン</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" id="arrival-tab" data-toggle="tab" href="#arrival" role="tab" aria-controls="arrival" aria-selected="false">新着</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">人気</a>
+		  </li>
 		</ul>
 	</div>
-	<br>
 
-	<div class="jscroll">
 	<div class="row">
-		<% @posts.each do |post| %>
-			<div class="card col-4">
-				<div class="card-header">
-					<p class="card-title">
-						<%= link_to post.title, post_path(post) %>
-					</p>
+		<div class="tab-content w-100">
+		  <div class="tab-pane fade show active timeline-jscroll" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+		  	<div class="row">
+		  		<% @follow_posts.each do |post| %>
+						<div class="col-4">
+							<div class="card">
+								<%= render "post_header", post: post %>
+								<%= render "post_body", post: post %>
+								<%= render "post_footer", post: post %>
+							</div>
+						</div>
+					<% end %>
 				</div>
+				<%= link_to_next_page @posts, '次のページ', class: "timeline-next" %>
+		  </div>
 
-				<div class="card-body">
-					<div class="card-subtitle">
-						<% post.tag_list.each do |tag| %>
-							<p class="badge badge-primary mr-1 p-2">
-								<%= link_to tag, posts_path(tag_name: tag), class: "text-white" %>
-							</p>
-						<% end %>
-					</div>
-					<div class="img" alt="Card image">
-						<% post.post_images.each do |image| %>
-							<p><%= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200" %>
-							</p>
-						<% end %>
-					</div>
-				</div>
-
-				<div class="card-footer">
-					<div class="card-text">
-						<p>
-							<%= post.user.name %>
-							<%= post.created_at %>
-						</p>
-					</div>
-				</div>
+		  <div class="tab-pane fade show arrival-jscroll" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
+		  	<div class="row">
+		  		<% @posts.each do |post| %>
+						<div class="col-4">
+							<div class="card">
+								<%= render "post_header", post: post %>
+								<%= render "post_body", post: post %>
+								<%= render "post_footer", post: post %>
+							</div>
+						</div>
+					<% end %>
+		  	</div>
+				<%= link_to_next_page @posts, '次のページ', class: "arrival-next" %>
 			</div>
-		<% end %>
-	</div>
-	<%= link_to_next_page @posts, '次のページ', class: "d-none next" %>
-	</div>
-	<br>
-	<div class="jscroll">
-	<div class="row">
-		<% @follow_posts.each do |post| %>
-			<div class="card col-4">
-				<div class="card-header">
-					<p class="card-title">
-						<%= link_to post.title, post_path(post) %>
-					</p>
-				</div>
 
-				<div class="card-body">
-					<div class="card-subtitle">
-						<% post.tag_list.each do |tag| %>
-							<p class="badge badge-primary mr-1 p-2">
-								<%= link_to tag, posts_path(tag_name: tag), class: "text-white" %>
-							</p>
-						<% end %>
-					</div>
-					<div class="img" alt="Card image">
-						<% post.post_images.each do |image| %>
-							<p>
-								<%= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200" %>
-							</p>
-						<% end %>
-					</div>
-				</div>
-				<div class="card-footer">
-					<div class="card-text">
-						<p>
-							<%= link_to post.user.name, user_path(post.user) %>
-							<%= post.created_at %>
-						</p>
-					</div>
-				</div>
+			<div class="tab-pane fade show popular-jscroll" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+				<div class="row">
+		  		<% @popular.each do |post| %>
+						<div class="col-4">
+							<div class="card">
+								<%= render "post_header", post: post %>
+								<%= render "post_body", post: post %>
+								<%= render "post_footer", post: post %>
+							</div>
+						</div>
+					<% end %>
+		  	</div>
+				<%= link_to_next_page @posts, '次のページ', class: "popular-next" %>
 			</div>
-		<% end %>
+		</div>
 	</div>
-	<%= link_to_next_page @posts, '次のページ', class: "d-none next" %>
-	</div>
-	<br>
 </div>
