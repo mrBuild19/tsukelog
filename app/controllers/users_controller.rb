@@ -2,8 +2,10 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = User.where.not(id: current_user)
-    @search = Post.ransack(params[:q])
+    # @users = User.where.not(id: current_user)
+    # @search = User.ransack(params[:q])
+    @search = User.where.not(id: current_user).ransack(params[:q])
+    @users =  @search.result
   end
 
   def show
