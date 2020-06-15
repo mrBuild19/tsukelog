@@ -21,6 +21,9 @@
         </div>
         <ul class="nav navbar-nav">
           <nav-item>
+            <%= link_to 'ユーザー', users_path, class: "nav-link border rounded" %>
+          </nav-item>
+          <nav-item>
             <%= link_to 'マイページ', user_path(current_user.id), class: "nav-link border rounded" %>
           </nav-item>
           <nav-item>
@@ -28,9 +31,6 @@
           </nav-item>
           <nav-item>
             <%= link_to '新規投稿', new_post_path, class: "nav-link border rounded" %>
-          </nav-item>
-          <nav-item>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link border rounded" %>
           </nav-item>
         </ul>
       <% else %>

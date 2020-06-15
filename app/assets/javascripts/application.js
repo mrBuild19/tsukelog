@@ -53,3 +53,51 @@ $(document).on('turbolinks:load', function() {
     loadingHtml: '読み込み中'
   });
 });
+
+$(document).on('turbolinks:load', function() {
+  $('.my_postr-jscroll').jscroll({
+    autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.my_postr-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.my_postr-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
+
+$(document).on('turbolinks:load', function() {
+  $('.follow-jscroll').jscroll({
+    autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.follow-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.follow-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
+
+$(document).on('turbolinks:load', function() {
+  $('.follower-jscroll').jscroll({
+    autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.follower-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.follower-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
+
+$(document).on('turbolinks:load', function() {
+  $('.like-jscroll').jscroll({
+    autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.like-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.like-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
