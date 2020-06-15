@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @users = User.where.not(id: current_user)
+    @search = Post.ransack(params[:q])
+  end
+
   def show
   	@user = User.find(params[:id])
     # タグ絞り込み
