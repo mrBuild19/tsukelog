@@ -101,3 +101,16 @@ $(document).on('turbolinks:load', function() {
     loadingHtml: '読み込み中'
   });
 });
+
+// 投稿検索画面の検索結果の無限スクロールmugennsukuro-ru
+$(document).on('turbolinks:load', function() {
+  $('.search-jscroll').jscroll({
+    autoTrigger: false,
+    // 無限に追加する要素は、どこに入れる？
+    contentSelector: '.search-jscroll',
+    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
+    nextSelector: 'a.search-next',
+    // 読み込み中の表示はどうする？
+    loadingHtml: '読み込み中'
+  });
+});
