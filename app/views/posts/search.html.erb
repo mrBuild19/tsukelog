@@ -1,1 +1,23 @@
-<h1>success</h1>
+<div class="container">
+	<div class="row">
+		<%= search_form_for @search, url: search_posts_path do |f| %>
+        	<%= f.search_field :title_or_text_or_user_name_cont, class: "form-control", placeholder: "投稿を検索" %>
+        	<%= f.submit '検索', class: "btn btn-success" %>
+     	<% end %>
+   </div>
+
+	<div class="search-jscroll">
+	<div class="row">
+		<% @search_posts.each do |post| %>
+			<div class="col-4">
+				<div class="card">
+					<%= render "post_header", post: post %>
+					<%= render "post_body", post: post %>
+					<%= render "post_footer", post: post %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<%= link_to_next_page @search_posts, '次のページ', class: "search-next" %>
+	</div>
+</div>

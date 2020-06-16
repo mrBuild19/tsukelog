@@ -43,6 +43,11 @@ class PostsController < ApplicationController
   	redirect_to posts_path, notice: "投稿を削除しました。"
   end
 
+  def search
+    @search = Post.ransack(params[:q])
+    @search_posts = @search.result.page(params[:page]).order(created_at: "DESC")
+  end
+
   private
   def post_params
     params.require(:post).permit(:title, :text, :tag_list, post_images_post_images: [])
