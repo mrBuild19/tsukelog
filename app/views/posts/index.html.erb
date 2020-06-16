@@ -1,12 +1,5 @@
 <div class="container">
 	<div class="row">
-		<%= search_form_for @search do |f| %>
-        <%= f.search_field :title_or_text_or_user_name_cont, class: "form-control", placeholder: "Search" %>
-        <%= f.submit '検索', class: "btn btn-success" %>
-     <% end %>
-   </div>
-
-	<div class="row">
 		<ul class="nav nav-pills nav-fill" role="tablist">
 		  <li class="nav-item">
 		    <a class="nav-link active" id="timeline-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="timeline" aria-selected="true">タイムライン</a>
@@ -24,47 +17,47 @@
 		<div class="tab-content w-100">
 		  <div class="tab-pane fade show active timeline-jscroll" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
 		  	<div class="row">
-		  		<% @follow_posts.each do |post| %>
-						<div class="col-4">
-							<div class="card">
-								<%= render "post_header", post: post %>
-								<%= render "post_body", post: post %>
-								<%= render "post_footer", post: post %>
-							</div>
+	  			<% @follow_posts.each do |post| %>
+					<div class="col-4">
+						<div class="card">
+							<%= render "post_header", post: post %>
+							<%= render "post_body", post: post %>
+							<%= render "post_footer", post: post %>
 						</div>
+					</div>
 					<% end %>
 				</div>
-				<%= link_to_next_page @posts, '次のページ', class: "timeline-next" %>
+				<%= link_to_next_page @follow_posts, '次のページ', class: "timeline-next" %>
 		  </div>
 
 		  <div class="tab-pane fade show arrival-jscroll" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
-		  	<div class="row">
-		  		<% @posts.each do |post| %>
-						<div class="col-4">
-							<div class="card">
-								<%= render "post_header", post: post %>
-								<%= render "post_body", post: post %>
-								<%= render "post_footer", post: post %>
-							</div>
+	  		<div class="row">
+	  			<% @arrival.each do |post| %>
+					<div class="col-4">
+						<div class="card">
+							<%= render "post_header", post: post %>
+							<%= render "post_body", post: post %>
+							<%= render "post_footer", post: post %>
 						</div>
+					</div>
 					<% end %>
-		  	</div>
-				<%= link_to_next_page @posts, '次のページ', class: "arrival-next" %>
+	  		</div>
+				<%= link_to_next_page @arrival, '次のページ', class: "arrival-next" %>
 			</div>
 
 			<div class="tab-pane fade show popular-jscroll" id="popular" role="tabpanel" aria-labelledby="popular-tab">
 				<div class="row">
-		  		<% @popular.each do |post| %>
-						<div class="col-4">
-							<div class="card">
-								<%= render "post_header", post: post %>
-								<%= render "post_body", post: post %>
-								<%= render "post_footer", post: post %>
-							</div>
+	  			<% @popular.each do |post| %>
+					<div class="col-4">
+						<div class="card">
+							<%= render "post_header", post: post %>
+							<%= render "post_body", post: post %>
+							<%= render "post_footer", post: post %>
 						</div>
+					</div>
 					<% end %>
-		  	</div>
-				<%= link_to_next_page @posts, '次のページ', class: "popular-next" %>
+	  		</div>
+				<%= link_to_next_page @popular, '次のページ', class: "popular-next" %>
 			</div>
 		</div>
 	</div>
