@@ -1,1 +1,26 @@
-<h1>success</h1>
+<div class="container">
+	<div class="row">
+		<%= search_form_for @search, url: search_users_path do |f| %>
+      		<%= f.search_field :name_cont, class: "form-control", placeholder: "ユーザーを検索" %>
+      		<%= f.submit '検索', class: "btn btn-success" %>
+    	<% end %>
+   	</div>
+
+   	<div class="row">
+	   	<ul class="nav nav-pills">
+		    <li class="nav-item">
+		      <a class="nav-link" href="<%= search_posts_path %>">投稿</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link active" href="#">ユーザー</a>
+		    </li>
+		</ul>
+	</div>
+
+   	<div class="search-jscroll">
+	<div class="row">
+		<%= render "user_list", users: @search_users %>
+	</div>
+	<%= link_to_next_page @search_users, '次のページ', class: "search-next" %>
+	</div>
+</div>

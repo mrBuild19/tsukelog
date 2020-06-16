@@ -6,6 +6,17 @@
      	<% end %>
    </div>
 
+    <div class="row">
+	   	<ul class="nav nav-pills">
+		    <li class="nav-item">
+		      <a class="nav-link active" href="#">投稿</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="<%= search_users_path %>">ユーザー</a>
+		    </li>
+		</ul>
+	</div>
+
 	<div class="search-jscroll">
 	<div class="row">
 		<% @search_posts.each do |post| %>
