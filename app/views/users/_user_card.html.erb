@@ -1,0 +1,11 @@
+<div class="card col-3 offset-1">
+	<div class="card-img-top">
+		<p><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg", size: "150x100" %></p>
+	</div>
+	<div class="card-body">
+		<p><%= user.name %></p>
+		<div class="follow_<%= user.id %>">
+    <%= render "users/follow_form", user: user %>
+   </div>
+ </div>
+</div>

@@ -1,3 +1,19 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'homes#top'
+  devise_for :users, controllers: {   registrations: 'users/registrations',
+                                    	sessions: 'users/sessions' }
+  resources :users, only: [:index, :show, :edit, :update] do
+    collection do
+      get 'search'
+    end
+  end
+  resources :posts do
+  	resources :post_comments, only: [:create, :destroy]
+  	resource :likes, only: [:create, :destroy]
+    collection do
+      get 'search'
+    end
+  end
+  post 'follow/:id' => 'relationships#follow', as: 'follow' #フォローする
+  post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow' #フォロー外す
 end
