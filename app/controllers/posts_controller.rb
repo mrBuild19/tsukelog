@@ -3,11 +3,11 @@ class PostsController < ApplicationController
   def index
     # フォローユーザーの投稿取得
     follow_users = current_user.following_user
-    @follow_posts = Post.where(user_id: follow_users).page(params[:page]).order(created_at: "DESC")
+    @timeline_posts = Post.where(user_id: follow_users).order(created_at: "DESC").page(params[:page]).per(1)
     # 新着順で投稿取得
-    @arrival = Post.page(params[:page]).order(created_at: "DESC")
+    @arrival_posts = Post.order(created_at: "DESC").page(params[:page]).per(3)
     # 人気順で投稿取得
-    @popular = Post.page(params[:page]).left_joins(:likes).group('posts.id').order('count(likes.post_id) DESC')
+    @popular_posts = Post.left_joins(:likes).group('posts.id').order('count(likes.post_id) DESC').page(params[:page]).per(3)
   end
 
   def new
@@ -47,9 +47,9 @@ class PostsController < ApplicationController
     @search = Post.ransack(params[:q])
     # タグ絞り込み処理
     if params[:tag_name]
-      @search_posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).order(created_at: "DESC")
+      @search_posts = Post.tagged_with("#{params[:tag_name]}").order(created_at: "DESC").page(params[:page]).per(3)
     else
-      @search_posts = @search.result.page(params[:page]).order(created_at: "DESC")
+      @search_posts = @search.result.order(created_at: "DESC").page(params[:page]).per(3)
     end
   end
 
