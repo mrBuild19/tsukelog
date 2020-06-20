@@ -22,9 +22,26 @@
 					<%= f.label :text %>
 					<%= f.text_area :text, class: 'form-control' %>
 				</div>
+
+				<div class="form-group">
+					<%= f.hidden_field :rate, id: 'post_rate', class: 'form-control' %>
+					<div id="star-rate"></div>
+				</div>
 			</div>
 
 			<%= f.submit nil, class: 'btn btn-primary' %>
 		<% end %>
 	</div>
 </div>
+
+<script>
+$('#star-rate').raty({
+	path: '/assets/',
+	size: 50,
+	half: true,
+	scoreName: 'post[rate]',
+	score: function() {
+		return $(this).attr('data-score');
+	}
+})
+</script>
