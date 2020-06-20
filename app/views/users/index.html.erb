@@ -1,8 +1,8 @@
 <div class="container">
 	<div id="jscroll">
 		<%= render "user_list", users: @users %>
+		<%= link_to_next_page @users, '次のページ', class: "next" %>
 	</div>
-	<%= link_to_next_page @users, '次のページ', class: "next" %>
 	<button class="button" type="button">もっと見る</button>
 	<%= render "shared/scroll_setting" %>
 </div>
