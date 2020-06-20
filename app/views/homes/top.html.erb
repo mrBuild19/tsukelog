@@ -16,35 +16,40 @@
 
  	<div class="row">
 		<div class="tab-content w-100">
-		  <div class="tab-pane fade show active arrival-jscroll" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
-		  	<div class="row">
-		  		<% @posts.each do |post| %>
-						<div class="col-4">
-							<div class="card">
-								<%= render "posts/post_header", post: post %>
-								<%= render "posts/post_body", post: post %>
-								<%= render "posts/post_footer", post: post %>
-							</div>
+		  <!-- 新着 -->
+			<div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
+	  			<div id="arrival-jscroll">
+	  				<!-- TODO 部分テンプレート化 -->
+	  				<div class="arrival-jscroll">
+						<div class="row">
+							<% @arrival_posts.each do |post| %>
+								<%= render "posts/post_card", post: post %>
+							<% end %>
 						</div>
-					<% end %>
+					</div>
+					<%= link_to_next_page @arrival_posts, '次のページ', class: "arrival-next" %>
+	  			</div>
+	  			<!-- TODO 部分テンプレート化 -->
+	  			<button class="arrival-button" type="button">もっと見る</button>
+				<%= render "shared/scroll_setting" %>
 		  	</div>
-				<%= link_to_next_page @posts, '次のページ', class: "arrival-next" %>
-			</div>
 
-			<div class="tab-pane fade show popular-jscroll" id="popular" role="tabpanel" aria-labelledby="popular-tab">
-				<div class="row">
-		  		<% @popular.each do |post| %>
-						<div class="col-4">
-							<div class="card">
-								<%= render "posts/post_header", post: post %>
-								<%= render "posts/post_body", post: post %>
-								<%= render "posts/post_footer", post: post %>
-							</div>
+		  	<!-- 人気 -->
+			<div class="tab-pane fade show" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+				<div id="popular-jscroll">
+	  				<div class="popular-jscroll">
+						<div class="row">
+							<% @popular_posts.each do |post| %>
+								<%= render "posts/post_card", post: post %>
+							<% end %>
 						</div>
-					<% end %>
-		  	</div>
-				<%= link_to_next_page @posts, '次のページ', class: "popular-next" %>
+					</div>
+	  				<%= link_to_next_page @popular_posts, '次のページ', class: "popular-next" %>
+	  			</div>
+	  			<!-- TODO 部分テンプレート化 -->
+	  			<button class="popular-button" type="button">もっと見る</button>
+	  			<%= render "shared/scroll_setting" %>
 			</div>
-			</div>
+		</div>
 	</div>
 </div>

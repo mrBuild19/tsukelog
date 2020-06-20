@@ -1,3 +1,7 @@
-<% users.each do |user| %>
-	<%= render "user_card", user: user %>
-<% end %>
+<div class="jscroll">
+	<div class="row">
+		<% users.each do |user| %>
+			<%= render "user_card", user: user %>
+		<% end %>
+	</div>
+</div>
