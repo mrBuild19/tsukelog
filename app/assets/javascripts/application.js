@@ -168,3 +168,17 @@ $(document).on("turbolinks:load", function() {
     status: ".page-load-status"
   });
 });
+
+// ユーザータブ
+$(document).on("turbolinks:load", function() {
+  $("#jscroll").infiniteScroll({
+    path: "a.next",
+    append: ".jscroll",
+    hideNav: "a.next",
+    button: ".button",
+    scrollThreshold: false,
+    history: false,
+    prefill: false,
+    status: ".page-load-status"
+  });
+});

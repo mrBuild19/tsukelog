@@ -17,18 +17,10 @@
 		</ul>
 	</div>
 
-	<div class="search-jscroll">
-	<div class="row">
-		<% @search_posts.each do |post| %>
-			<div class="col-4">
-				<div class="card">
-					<%= render "post_header", post: post %>
-					<%= render "post_body", post: post %>
-					<%= render "post_footer", post: post %>
-				</div>
-			</div>
-		<% end %>
+	<div id="jscroll">
+		<%= render "posts/post_list", posts: @search_posts %>
 	</div>
-	<%= link_to_next_page @search_posts, '次のページ', class: "search-next" %>
-	</div>
+	<%= link_to_next_page @search_posts, '次のページ', class: "next" %>
+	<button class="button" type="button">もっと見る</button>
+	<%= render "shared/scroll_setting" %>
 </div>

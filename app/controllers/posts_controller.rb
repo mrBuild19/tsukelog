@@ -47,9 +47,9 @@ class PostsController < ApplicationController
     @search = Post.ransack(params[:q])
     # タグ絞り込み処理
     if params[:tag_name]
-      @search_posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).order(created_at: "DESC")
+      @search_posts = Post.tagged_with("#{params[:tag_name]}").order(created_at: "DESC").page(params[:page]).per(3)
     else
-      @search_posts = @search.result.page(params[:page]).order(created_at: "DESC")
+      @search_posts = @search.result.order(created_at: "DESC").page(params[:page]).per(3)
     end
   end
 
