@@ -16,6 +16,8 @@
 			<% end %>
 			<p>本文</p>
 			<p><%= @post.text %></p>
+			<br>
+			<div id="star-rate"></div>
 		</div>
 	</div>
 	<br>
@@ -57,3 +59,14 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$('#star-rate').raty({
+	path: '/assets/',
+	size: 50,
+	half: true,
+	readOnly: true,
+	scoreName: 'post[rate]',
+	score: <%= @post.rate %>
+})
+</script>
