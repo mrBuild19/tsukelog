@@ -7,10 +7,10 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
-    @my_posts =  @user.posts.page(params[:page]).order(created_at: "DESC")
-    @follow_users = @user.following_user.page(params[:page])
-    @follower_users = @user.followers_user.page(params[:page])
-    @like_posts = @user.likes.page(params[:page])
+    @my_posts =  @user.posts.order(created_at: "DESC").page(params[:page]).per(3)
+    @follow_users = @user.following_user.page(params[:page]).per(3)
+    @follower_users = @user.followers_user.page(params[:page]).per(3)
+    @like_posts = @user.likes.page(params[:page]).per(3)
   end
 
   def edit
