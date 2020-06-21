@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_06_20_132558) do
 
   create_table "post_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "post_id"
-    t.string "post_image_id"
+    t.string "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

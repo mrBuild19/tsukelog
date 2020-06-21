@@ -3,7 +3,16 @@
 		<%= form_with model: @post, local: true do |f| %>
 			<div class="post-left">
 				<div class="form-group">
-					<%= f.attachment_field :post_images_post_images, multiple: true, class: 'form-control' %>
+					<label>
+						<div class="form_main">
+							<%= image_tag 'no_image.jpg', size: "150x150"  %>
+		                </div>
+		                <div class="form_sub">
+		                    <span class="btn btn-primary">画像を選択
+		                        <%= f.attachment_field :post_images_images, multiple: true, class: 'form-control-file', style: 'display: none' %>
+		                    </span>
+		                </div>
+					</label>
 				</div>
 			</div>
 

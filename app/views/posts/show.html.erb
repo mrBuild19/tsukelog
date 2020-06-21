@@ -2,7 +2,7 @@
 	<div class="row media">
 		<div class="post-left d-flex mr-3">
 			<% @post.post_images.each do |image| %>
-				<%= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200" %>
+				<%= attachment_image_tag image, :image, fallback: "no_image.jpg", size: "200x200" %>
 			<% end %>
 		</div>
 

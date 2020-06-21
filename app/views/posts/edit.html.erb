@@ -3,11 +3,19 @@
 		<%= form_with model: @post, local: true do |f| %>
 			<div class="post-left d-flex mr-3">
 				<div class="form-group">
-					<% @post.post_images.each do |image| %>
-						<%= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200" %>
-						<%= f.attachment_field :post_images_post_images, multiple: true, class: 'form-control-file' %>
-					<% end %>
-				</div>
+                    <label>
+                    <div class="form_main">
+                    	<% @post.post_images.each do |image| %>
+                        	<%= attachment_image_tag image, :image, fallback: "no_image.jpg", size: "150x150", class: 'image_form' %>
+                        <% end %>
+                    </div>
+                    <div class="form_sub">
+                        <span class="btn btn-primary">画像を選択
+                            	<%= f.attachment_field :post_images_images, multiple: true, class: 'form-control-file', style: 'display: none' %>
+                        </span>
+                    </div>
+                    </label>
+                </div>
 			</div>
 
 			<div class="media-body post-right">
