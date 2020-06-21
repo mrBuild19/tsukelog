@@ -40,7 +40,12 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to posts_path, notice: "投稿を削除しました。"
+    flash[:notice] = "投稿を削除しました。"
+    if params[:admin].present?
+      redirect_back(fallback_location: posts_path)
+    else
+      redirect_to posts_path
+    end
   end
 
   def search

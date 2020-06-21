@@ -2,5 +2,11 @@
 	<p>
 		<%= post.user.name %>
 		<%= post.created_at %>
+
+		<% if user_signed_in? %>
+			<% if current_user.admin? %>
+				<%= link_to '削除', post_path(post, admin: "admin"), method: :delete, class: 'btn btn-danger' %>
+			<% end %>
+		<% end %>
 	</p>
 </div>
