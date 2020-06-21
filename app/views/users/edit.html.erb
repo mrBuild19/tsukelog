@@ -10,7 +10,9 @@
                         <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x150", class: 'image_form' %>
                     </div>
                     <div class="form_sub">
-                        <%= f.attachment_field :profile_image, class: 'form-control-file' %>
+                        <span class="btn btn-primary">画像を選択
+                            <%= f.attachment_field :profile_image, class: 'form-control-file', style: 'display: none' %>
+                        </span>
                     </div>
                     </label>
                 </div>
