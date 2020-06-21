@@ -26,6 +26,13 @@ class UsersController < ApplicationController
 		end
   end
 
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    flash[:notice] = "#{user.name}さんを削除しました。"
+    redirect_back(fallback_location: users_path)
+  end
+
   def search
     @search = User.ransack(params[:q])
     @search_users =  @search.result.page(params[:page])
