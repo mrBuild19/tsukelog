@@ -1,95 +1,120 @@
 <div class="container">
-  <div class="row media">
-    <div class="post-left d-flex mr-3">
-      <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x100" %>
-    </div>
-    <div class="post-right media-body">
-      <p><%= @user.name %></p>
-      <% if user_signed_in? && @user != current_user %>
-        <div class="follow_<%= @user.id %>">
-          <%= render "users/follow_form", user: @user %>
+    <div class="row media">
+        <div class="post-left d-flex mr-3">
+            <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x150" %>
         </div>
-      <% else %>
-        <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary' %>
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
-      <% end %>
-      <p><%= @user.introduction %></p>
-    </div>
-  </div>
-
-  <br>
-  <div class="row">
-    <ul class="nav nav-tabs" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="my_post-tab" data-toggle="tab" href="#my_post" role="tab" aria-controls="my_post" aria-selected="true">投稿 <%= @my_posts.count %></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="follow-tab" data-toggle="tab" href="#follow" role="tab" aria-controls="follow" aria-selected="false">フォロー <%= @user.follower.count %></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="follower-tab" data-toggle="tab" href="#follower" role="tab" aria-controls="follower" aria-selected="false">フォロワー <%= @user.followed.count %></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="like-tab" data-toggle="tab" href="#like" role="tab" aria-controls="like" aria-selected="false">いいね <%= @like_posts.count %></a>
-      </li>
-    </ul>
-  </div>
-  <br />
-
-  <div class="row">
-    <div class="tab-content w-100">
-      <div class="tab-pane fade show active my_post-jscroll" id="my_post" role="tabpanel" aria-labelledby="my_post-tab">
-        <% unless @my_posts.blank? %>
-          <div class="row">
-            <% @my_posts.each do |post| %>
-              <div class="col-4">
-                <div class="card">
-                  <%= render "posts/post_header", post: post %>
-                  <%= render "posts/post_body", post: post %>
-                  <%= render "posts/post_footer", post: post %>
+        <div class="post-right media-body">
+            <p><%= @user.name %></p>
+            <% if user_signed_in? && @user != current_user %>
+                <div class="follow_<%= @user.id %>">
+                    <%= render "users/follow_form", user: @user %>
                 </div>
-              </div>
+            <% else %>
+                <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary' %>
+                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
             <% end %>
-          </div>
-          <%= link_to_next_page @my_posts, '次のページ', class: "my_post-next" %>
-        <% else %>
-          <p>投稿がありません。</p>
-        <% end %>
-      </div>
-
-      <div class="tab-pane fade show follow-jscroll" id="follow" role="tabpanel" aria-labelledby="follow-tab">
-        <div class="row">
-          <% @follow_users.each do |follow_user| %>
-            <%= render "user_card", user: follow_user %>
-          <% end %>
+            <p><%= @user.introduction %></p>
         </div>
-        <%= link_to_next_page @follow_users, '次のページ', class: "follow-next" %>
-      </div>
-
-      <div class="tab-pane fade show follower-jscroll" id="follower" role="tabpanel" aria-labelledby="follower-tab">
-        <div class="row">
-          <% @follower_users.each do |follower_user| %>
-            <%= render "user_card", user: follower_user %>
-          <% end %>
-        </div>
-        <%= link_to_next_page @follower_users, '次のページ', class: "follower-next" %>
-      </div>
-
-      <div class="tab-pane fade show like-jscroll" id="like" role="tabpanel" aria-labelledby="like-tab">
-        <div class="row">
-          <% @like_posts.each do |like_post| %>
-            <div class="col-4">
-              <div class="card">
-                <%= render "posts/post_header", post: like_post.post %>
-                <%= render "posts/post_body", post: like_post.post %>
-                <%= render "posts/post_footer", post: like_post.post %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-        <%= link_to_next_page @like_posts, '次のページ', class: "like-next" %>
-      </div>
-
     </div>
-  </div>
+
+    <br>
+    <div class="row">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="my-tab" data-toggle="tab" href="#my" role="tab" aria-controls="my" aria-selected="true">投稿 <%= @user.posts.count %></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="follow-tab" data-toggle="tab" href="#follow" role="tab" aria-controls="follow" aria-selected="false">フォロー <%= @user.follower.count %></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="follower-tab" data-toggle="tab" href="#follower" role="tab" aria-controls="follower" aria-selected="false">フォロワー <%= @user.followed.count %></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" id="like-tab" data-toggle="tab" href="#like" role="tab" aria-controls="like" aria-selected="false">いいね <%= @user.likes.count %></a>
+            </li>
+        </ul>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="tab-content w-100">
+            <!-- current_userの投稿 -->
+            <div class="tab-pane fade show active" id="my" role="tabpanel" aria-labelledby="my-tab">
+                <% unless @my_posts.blank? %>
+                    <div id="my-jscroll">
+                        <!-- TODO 部分テンプレート化 -->
+                        <div class="my-jscroll">
+                            <div class="row">
+                                <% @my_posts.each do |my_post| %>
+                                    <%= render "posts/post_card", post: my_post %>
+                                <% end %>
+                            </div>
+                        </div>
+                        <%= link_to_next_page @my_posts, '次のページ', class: "my-next" %>
+                    </div>
+                    <!-- TODO 部分テンプレート化 -->
+                    <button class="my-button" type="button">もっと見る</button>
+                    <%= render "shared/scroll_setting" %>
+                <% else %>
+                    <p>投稿がありません。</p>
+                <% end %>
+            </div>
+
+            <!-- フォローリスト -->
+            <div class="tab-pane fade show" id="follow" role="tabpanel" aria-labelledby="follow-tab">
+                <div id="follow-jscroll">
+                    <!-- TODO 部分テンプレート化 -->
+                    <div class="follow-jscroll">
+                        <div class="row">
+                            <% @follow_users.each do |follow_user| %>
+                                <%= render "users/user_card", user: follow_user %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <%= link_to_next_page @follow_users, '次のページ', class: "follow-next" %>
+                </div>
+                <button class="follow-button" type="button">もっと見る</button>
+                <%= render "shared/scroll_setting" %>
+            </div>
+
+            <!-- フォロワーリスト -->
+            <div class="tab-pane fade show follower-jscroll" id="follower" role="tabpanel" aria-labelledby="follower-tab">
+                <div id="follower-jscroll">
+                    <!-- TODO 部分テンプレート化 -->
+                    <div class="follower-jscroll">
+                        <div class="row">
+                            <% @follower_users.each do |follower_user| %>
+                                <%= render "users/user_card", user: follower_user %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <%= link_to_next_page @follower_users, '次のページ', class: "follower-next" %>
+                </div>
+                <button class="follower-button" type="button">もっと見る</button>
+                <%= render "shared/scroll_setting" %>
+            </div>
+
+            <!-- いいねした投稿 -->
+            <div class="tab-pane fade show" id="like" role="tabpanel" aria-labelledby="like-tab">
+                <% unless @like_posts.blank? %>
+                    <div id="like-jscroll">
+                        <!-- TODO 部分テンプレート化 -->
+                        <div class="like-jscroll">
+                            <div class="row">
+                                <% @like_posts.each do |like_post| %>
+                                    <%= render "posts/post_card", post: like_post.post %>
+                                <% end %>
+                            </div>
+                        </div>
+                        <%= link_to_next_page @like_posts, '次のページ', class: "like-next" %>
+                    </div>
+                    <!-- TODO 部分テンプレート化 -->
+                    <button class="like-button" type="button">もっと見る</button>
+                    <%= render "shared/scroll_setting" %>
+                <% else %>
+                    <p>投稿がありません。</p>
+                <% end %>
+            </div>
+        </div>
+    </div>
 </div>

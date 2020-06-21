@@ -2,7 +2,7 @@
 	<div class="row media">
 		<div class="post-left d-flex mr-3">
 			<% @post.post_images.each do |image| %>
-				<%= attachment_image_tag image, :post_image, fallback: "no_image.jpg", size: "200x200" %>
+				<%= attachment_image_tag image, :image, fallback: "no_image.jpg", size: "200x200" %>
 			<% end %>
 		</div>
 
@@ -16,6 +16,8 @@
 			<% end %>
 			<p>本文</p>
 			<p><%= @post.text %></p>
+			<br>
+			<div id="star-rate"></div>
 		</div>
 	</div>
 	<br>
@@ -33,14 +35,14 @@
 		</div>
 	</div>
 	<br>
-	<div class="row">
-		<div class="post-to-edit">
+	<% if current_user == @post.user || current_user.admin? %>
+		<div class="row">
 			<li class="list-unstyled">
 				<%= link_to '削除', @post, method: :delete, class: 'btn btn-danger' %>
 				<%= link_to '投稿編集', edit_post_path(@post), class: 'btn btn-primary' %>
 			</li>
 		</div>
-	</div>
+	<% end %>
 	<br>
 	<br>
 	<div class="row">
@@ -57,3 +59,14 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$('#star-rate').raty({
+	path: '/assets/',
+	size: 50,
+	half: true,
+	readOnly: true,
+	scoreName: 'post[rate]',
+	score: <%= @post.rate %>
+})
+</script>

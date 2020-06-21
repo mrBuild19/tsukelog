@@ -4,8 +4,11 @@
 	</div>
 	<div class="card-body">
 		<p><%= user.name %></p>
-		<div class="follow_<%= user.id %>">
-    <%= render "users/follow_form", user: user %>
-   </div>
- </div>
+
+		<% if current_user.admin? %>
+			<%= link_to '削除', user_path(user), method: :delete, class: 'btn btn-danger' %>
+		<% else %>
+			<div class="follow_<%= user.id %>"><%= render "users/follow_form", user: user %></div>
+   		<% end %>
+ 	</div>
 </div>

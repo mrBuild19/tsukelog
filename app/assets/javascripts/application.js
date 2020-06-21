@@ -15,102 +15,153 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-//= require jquery.jscroll.min.js
 //= require bootstrap.min.js
 
 $(document).on('turbolinks:load', function() {
-  $('.timeline-jscroll').jscroll({
-  	autoTrigger: false,
-    // 無限に追加する要素は、どこに入れる？
-    contentSelector: '.timeline-jscroll',
-    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
-    nextSelector: 'a.timeline-next',
-    // 読み込み中の表示はどうする？
-    loadingHtml: '読み込み中'
+$(function(){
+  //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
+  $('form').on('change', 'input[type="file"]', function(e) {
+    var file = e.target.files[0],
+        reader = new FileReader(),
+        $subimageboxs = $(".form_main");
+        t = this;
+
+    // 画像ファイル以外の場合は何もしない
+    if(file.type.indexOf("image") < 0){
+      return false;
+    }
+
+    // ファイル読み込みが完了した際のイベント登録
+    reader.onload = (function(file) {
+      return function(e) {
+        //既存のプレビューを削除
+        $subimageboxs.empty();
+        // .prevewの領域の中にロードした画像を表示するimageタグを追加
+        $subimageboxs.append($('<img>').attr({
+                  src: e.target.result,
+                  width: "150px",
+                  class: "form_sub",
+                  title: file.name
+              }));
+      };
+    })(file);
+
+    reader.readAsDataURL(file);
+  });
+});
+});
+
+
+// TODO DRY原則。変数を用いて、最小限まで減らす。
+// TODO BUG 次のページがない時の処理
+// 投稿一覧画面タイムラインタブ
+$(document).on("turbolinks:load", function() {
+  $("#timeline-jscroll").infiniteScroll({
+    path: "a.timeline-next",
+    append: ".timeline-jscroll",
+    hideNav: "a.timeline-next",
+    scrollThreshold: true,
+    history: false,
+    prefill: true,
+    status: ".page-load-status"
   });
 });
 
-$(document).on('turbolinks:load', function() {
-  $('.arrival-jscroll').jscroll({
-  	autoTrigger: false,
-    // 無限に追加する要素は、どこに入れる？
-    contentSelector: '.arrival-jscroll',
-    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
-    nextSelector: 'a.arrival-next',
-    // 読み込み中の表示はどうする？
-    loadingHtml: '読み込み中'
+// 投稿一覧画面新着タブ
+$(document).on("turbolinks:load", function() {
+  $("#arrival-jscroll").infiniteScroll({
+    path: "a.arrival-next",
+    append: ".arrival-jscroll",
+    hideNav: "a.arrival-next",
+    button: ".arrival-button",
+    scrollThreshold: false,
+    history: false,
+    prefill: false,
+    status: ".page-load-status"
   });
 });
 
-$(document).on('turbolinks:load', function() {
-  $('.popular-jscroll').jscroll({
-  	autoTrigger: false,
-    // 無限に追加する要素は、どこに入れる？
-    contentSelector: '.popular-jscroll',
-    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
-    nextSelector: 'a.popular-next',
-    // 読み込み中の表示はどうする？
-    loadingHtml: '読み込み中'
+// 投稿一覧画面人気タブ
+$(document).on("turbolinks:load", function() {
+  $("#popular-jscroll").infiniteScroll({
+    path: "a.popular-next",
+    append: ".popular-jscroll",
+    hideNav: "a.popular-next",
+    button: ".popular-button",
+    scrollThreshold: false,
+    history: false,
+    prefill: false,
+    status: ".page-load-status"
   });
 });
 
-$(document).on('turbolinks:load', function() {
-  $('.my_postr-jscroll').jscroll({
-    autoTrigger: false,
-    // 無限に追加する要素は、どこに入れる？
-    contentSelector: '.my_postr-jscroll',
-    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
-    nextSelector: 'a.my_postr-next',
-    // 読み込み中の表示はどうする？
-    loadingHtml: '読み込み中'
+// ユーザー一覧画面&検索画面(ユーザー&投稿)
+$(document).on("turbolinks:load", function() {
+  $("#jscroll").infiniteScroll({
+    path: "a.next",
+    append: ".jscroll",
+    hideNav: "a.next",
+    button: ".button",
+    scrollThreshold: false,
+    history: false,
+    prefill: false,
+    status: ".page-load-status"
   });
 });
 
-$(document).on('turbolinks:load', function() {
-  $('.follow-jscroll').jscroll({
-    autoTrigger: false,
-    // 無限に追加する要素は、どこに入れる？
-    contentSelector: '.follow-jscroll',
-    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
-    nextSelector: 'a.follow-next',
-    // 読み込み中の表示はどうする？
-    loadingHtml: '読み込み中'
+// マイページ画面current_userの投稿タブ
+$(document).on("turbolinks:load", function() {
+  $("#my-jscroll").infiniteScroll({
+    path: "a.my-next",
+    append: ".my-jscroll",
+    hideNav: "a.my-next",
+    button: ".my-button",
+    scrollThreshold: false,
+    history: false,
+    prefill: false,
+    status: ".page-load-status"
   });
 });
 
-$(document).on('turbolinks:load', function() {
-  $('.follower-jscroll').jscroll({
-    autoTrigger: false,
-    // 無限に追加する要素は、どこに入れる？
-    contentSelector: '.follower-jscroll',
-    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
-    nextSelector: 'a.follower-next',
-    // 読み込み中の表示はどうする？
-    loadingHtml: '読み込み中'
+
+// マイページ画面フォローリストタブ
+$(document).on("turbolinks:load", function() {
+  $("#follow-jscroll").infiniteScroll({
+    path: "a.follow-next",
+    append: ".follow-jscroll",
+    hideNav: "a.follow-next",
+    button: ".follow-button",
+    scrollThreshold: false,
+    history: false,
+    prefill: false,
+    status: ".page-load-status"
   });
 });
 
-$(document).on('turbolinks:load', function() {
-  $('.like-jscroll').jscroll({
-    autoTrigger: false,
-    // 無限に追加する要素は、どこに入れる？
-    contentSelector: '.like-jscroll',
-    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
-    nextSelector: 'a.like-next',
-    // 読み込み中の表示はどうする？
-    loadingHtml: '読み込み中'
+// マイページ画面フォロワーリストタブ
+$(document).on("turbolinks:load", function() {
+  $("#follower-jscroll").infiniteScroll({
+    path: "a.follower-next",
+    append: ".follower-jscroll",
+    hideNav: "a.follower-next",
+    button: ".follower-button",
+    scrollThreshold: false,
+    history: false,
+    prefill: false,
+    status: ".page-load-status"
   });
 });
 
-// 投稿検索画面の検索結果の無限スクロールmugennsukuro-ru
-$(document).on('turbolinks:load', function() {
-  $('.search-jscroll').jscroll({
-    autoTrigger: false,
-    // 無限に追加する要素は、どこに入れる？
-    contentSelector: '.search-jscroll',
-    // 次のページにいくためのリンクの場所は？ ＞aタグの指定
-    nextSelector: 'a.search-next',
-    // 読み込み中の表示はどうする？
-    loadingHtml: '読み込み中'
+// マイページ画面いいねした投稿タブ
+$(document).on("turbolinks:load", function() {
+  $("#like-jscroll").infiniteScroll({
+    path: "a.like-next",
+    append: ".like-jscroll",
+    hideNav: "a.like-next",
+    button: ".like-button",
+    scrollThreshold: false,
+    history: false,
+    prefill: false,
+    status: ".page-load-status"
   });
 });
