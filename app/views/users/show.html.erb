@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row media">
         <div class="post-left d-flex mr-3">
-            <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x100" %>
+            <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x150" %>
         </div>
         <div class="post-right media-body">
             <p><%= @user.name %></p>

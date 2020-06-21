@@ -17,6 +17,41 @@
 //= require_tree .
 //= require bootstrap.min.js
 
+$(document).on('turbolinks:load', function() {
+$(function(){
+  //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
+  $('form').on('change', 'input[type="file"]', function(e) {
+    var file = e.target.files[0],
+        reader = new FileReader(),
+        $subimageboxs = $(".form_main");
+        t = this;
+
+    // 画像ファイル以外の場合は何もしない
+    if(file.type.indexOf("image") < 0){
+      return false;
+    }
+
+    // ファイル読み込みが完了した際のイベント登録
+    reader.onload = (function(file) {
+      return function(e) {
+        //既存のプレビューを削除
+        $subimageboxs.empty();
+        // .prevewの領域の中にロードした画像を表示するimageタグを追加
+        $subimageboxs.append($('<img>').attr({
+                  src: e.target.result,
+                  width: "150px",
+                  class: "form_sub",
+                  title: file.name
+              }));
+      };
+    })(file);
+
+    reader.readAsDataURL(file);
+  });
+});
+});
+
+
 // TODO DRY原則。変数を用いて、最小限まで減らす。
 // TODO BUG 次のページがない時の処理
 // 投稿一覧画面タイムラインタブ
