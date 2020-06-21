@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'homes#top'
   devise_for :users, controllers: {   registrations: 'users/registrations',
                                     	sessions: 'users/sessions' }
-  resources :users, only: [:index, :show, :edit, :update] do
+  resources :users, only: [:index, :show, :edit, :update, :destroy] do
     collection do
       get 'search'
     end

@@ -35,14 +35,14 @@
 		</div>
 	</div>
 	<br>
-	<div class="row">
-		<div class="post-to-edit">
+	<% if current_user == @post.user || current_user.admin? %>
+		<div class="row">
 			<li class="list-unstyled">
 				<%= link_to '削除', @post, method: :delete, class: 'btn btn-danger' %>
 				<%= link_to '投稿編集', edit_post_path(@post), class: 'btn btn-primary' %>
 			</li>
 		</div>
-	</div>
+	<% end %>
 	<br>
 	<br>
 	<div class="row">
