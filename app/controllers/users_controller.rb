@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
-    @users =  User.page(params[:page]).per(3)
+    @users =  User.where.not(admin: true).page(params[:page]).per(3)
   end
 
   def show
