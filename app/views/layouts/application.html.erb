@@ -1,64 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
+    <head>
     <title>つけログ</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    </head>
 
-  <body>
-  <header>
-    <div class="navbar navbar-expand-md navbar-light bg-light">
-      <div class="navbar-brand mr-auto">
-        <%= link_to 'つけログ', root_path, class: "border" %>
-      </div>
-      <% if user_signed_in? %>
-        <div class="ul nav navbar-nav mr-auto">
-          <p> ようこそ、<%= current_user.name %> さん! </p>
+<body>
+    <header>
+        <div class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="navbar-brand mr-auto">
+                <%= link_to 'つけログ', root_path, class: "border" %>
+            </div>
+            <% if user_signed_in? %>
+                <div class="ul nav navbar-nav mr-auto">
+                    <p> ようこそ、<%= current_user.name %> さん! </p>
+                </div>
+                <ul class="nav navbar-nav">
+                    <nav-item>
+                        <%= link_to '検索', search_posts_path, class: "nav-link border rounded" %>
+                    </nav-item>
+                    <nav-item>
+                        <%= link_to 'ユーザー', users_path, class: "nav-link border rounded" %>
+                    </nav-item>
+                    <nav-item>
+                        <%= link_to 'マイページ', user_path(current_user.id), class: "nav-link border rounded" %>
+                    </nav-item>
+                    <nav-item>
+                        <%= link_to '投稿一覧', posts_path, class: "nav-link border rounded　p-auto" %>
+                    </nav-item>
+                    <nav-item>
+                        <%= link_to '新規投稿', new_post_path, class: "nav-link border rounded" %>
+                    </nav-item>
+                </ul>
+            <% else %>
+                <ul class="nav navbar-nav">
+                    <nav-item>
+                        <%= link_to '投稿一覧', posts_path, class: "nav-link border rounded" %>
+                    </nav-item>
+                    <nav-item>
+                        <%= link_to '新規登録', new_user_registration_path, class: "nav-link border rounded" %>
+                    </nav-item>
+                    <nav-item>
+                    <%= link_to 'ログイン', new_user_session_path, class: "nav-link border rounded" %>
+                    </nav-item>
+                </ul>
+            <% end %>
         </div>
-        <ul class="nav navbar-nav">
-          <nav-item>
-            <%= link_to '検索', search_posts_path, class: "nav-link border rounded" %>
-          </nav-item>
-          <nav-item>
-            <%= link_to 'ユーザー', users_path, class: "nav-link border rounded" %>
-          </nav-item>
-          <nav-item>
-            <%= link_to 'マイページ', user_path(current_user.id), class: "nav-link border rounded" %>
-          </nav-item>
-          <nav-item>
-            <%= link_to '投稿一覧', posts_path, class: "nav-link border rounded　p-auto" %>
-          </nav-item>
-          <nav-item>
-            <%= link_to '新規投稿', new_post_path, class: "nav-link border rounded" %>
-          </nav-item>
-        </ul>
-      <% else %>
-        <ul class="nav navbar-nav">
-          <nav-item>
-            <%= link_to '投稿一覧', posts_path, class: "nav-link border rounded" %>
-          </nav-item>
-          <nav-item>
-            <%= link_to '新規登録', new_user_registration_path, class: "nav-link border rounded" %>
-          </nav-item>
-          <nav-item>
-            <%= link_to 'ログイン', new_user_session_path, class: "nav-link border rounded" %>
-          </nav-item>
-        </ul>
-      <% end %>
+    </header>
 
-    </div>
-  </header>
+    <main>
+        <%= yield %>
+    </main>
 
-  <p class="notice">
-    <%= notice %>
-  </p>
-  <p class="alert">
-    <%= alert %>
-  </p>
-
-  <%= yield %>
 </body>
