@@ -1,4 +1,8 @@
 <div class="container">
+	<% if notice.present? %>
+        <%= render "shared/notice", notice: notice %>
+    <% end %>
+
 	<div class="row media">
 		<div class="post-left d-flex mr-3">
 			<% @post.post_images.each do |image| %>
