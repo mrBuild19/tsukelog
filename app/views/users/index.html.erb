@@ -1,4 +1,11 @@
 <div class="container">
+	<% if notice.present? %>
+        <%= render "shared/notice", notice: notice %>
+    <% end %>
+	<% if alert.present? %>
+        <%= render "shared/alert", alert: alert %>
+    <% end %>
+
 	<div id="jscroll">
 		<%= render "user_list", users: @users %>
 		<%= link_to_next_page @users, '次のページ', class: "next" %>

@@ -16,15 +16,18 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(post_params)
-    post.user_id = current_user.id
-    post.save
-    redirect_to posts_path, notice: "登録しました。"
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    if @post.save
+      redirect_to posts_path, notice: "投稿しました。"
+    else
+      render :new
+    end
   end
 
   def show
     @post = Post.find(params[:id])
-    @comment = PostComment.new
+    @comments = PostComment.new
   end
 
   def edit
@@ -32,15 +35,18 @@ class PostsController < ApplicationController
   end
 
   def update
-    post = Post.find(params[:id])
-    post.update(post_params)
-    redirect_to post_path(post), notice: "投稿を更新しました。"
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: "投稿を更新しました。"
+    else
+      render :edit
+    end
   end
 
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    flash[:notice] = "投稿を削除しました。"
+    flash[:alert] = "投稿を削除しました。"
     if params[:admin].present?
       redirect_back(fallback_location: posts_path)
     else

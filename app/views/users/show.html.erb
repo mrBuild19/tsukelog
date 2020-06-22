@@ -1,4 +1,11 @@
 <div class="container">
+    <% if notice.present? %>
+        <%= render "shared/notice", notice: notice %>
+    <% end %>
+    <% if alert.present? %>
+        <%= render "shared/alert", alert: alert %>
+    <% end %>
+
     <div class="row media">
         <div class="post-left d-flex mr-3">
             <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x150" %>

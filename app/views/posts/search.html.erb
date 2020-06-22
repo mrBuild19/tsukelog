@@ -1,4 +1,8 @@
 <div class="container">
+	<% if alert.present? %>
+        <%= render "shared/alert", alert: alert %>
+    <% end %>
+
 	<div class="row">
 		<%= search_form_for @search, url: search_posts_path do |f| %>
         	<%= f.search_field :title_or_text_or_user_name_cont, class: "form-control", placeholder: "投稿を検索" %>

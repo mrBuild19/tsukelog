@@ -1,6 +1,8 @@
 <div class="container">
 	<div class="row media">
 		<%= form_with model: @post, local: true do |f| %>
+			<%= render "shared/error_messages", model: f.object %>
+
 			<div class="post-left d-flex mr-3">
 				<div class="form-group">
                     <label>
