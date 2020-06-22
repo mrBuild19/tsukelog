@@ -27,7 +27,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comment = PostComment.new
+    @comments = PostComment.new
   end
 
   def edit

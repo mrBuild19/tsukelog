@@ -1,4 +1,7 @@
 <div class="container">
+	<% if @comment.present? %>
+		<%= render "shared/error_messages", model: @comment %>
+	<% end %>
 	<% if notice.present? %>
         <%= render "shared/notice", notice: notice %>
     <% end %>
@@ -50,7 +53,7 @@
 	<br>
 	<br>
 	<div class="row">
-		<%= render "comment_form", post: @post, comment: @comment %>
+		<%= render "posts/comment_form", post: @post, comments: @comments %>
 	</div>
 	<br>
 	<div class="row">
@@ -59,7 +62,7 @@
 	<br>
 	<div class="row">
 		<div class="comment_index">
-			<%= render "comment_index", post: @post %>
+			<%= render "posts/comment_index", post: @post %>
 		</div>
 	</div>
 </div>
