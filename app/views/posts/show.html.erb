@@ -2,9 +2,7 @@
 	<% if @comment.present? %>
 		<%= render "shared/error_messages", model: @comment %>
 	<% end %>
-	<% if notice.present? %>
-        <%= render "shared/notice", notice: notice %>
-    <% end %>
+	<%= render "shared/notice", notice: notice %>
 
 	<div class="row media">
 		<div class="post-left d-flex mr-3">

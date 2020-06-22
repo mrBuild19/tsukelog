@@ -1,7 +1,5 @@
 <div class="container">
-	<% if alert.present? %>
-        <%= render "shared/alert", alert: alert %>
-    <% end %>
+	<%= render "shared/alert", alert: alert %>
 
 	<div class="row">
 		<%= search_form_for @search, url: search_users_path do |f| %>
