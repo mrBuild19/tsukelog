@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :admin_user, only: :destroy
 
   def index
-    @users =  User.page(params[:page]).per(3)
+    @users =  User.where.not(admin: true).page(params[:page]).per(3)
   end
 
   def show
@@ -41,5 +42,8 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
+  end
+  def admin_user
+    redirect_to users_path unless current_user.admin?
   end
 end
