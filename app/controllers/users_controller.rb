@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user, only: :destroy
+  before_action :set_user, only: [:show, :edit]
 
   def index
     @users =  User.where.not(admin: true).page(params[:page]).per(3)
@@ -13,10 +14,10 @@ class UsersController < ApplicationController
     @like_posts = @user.likes.page(params[:page]).per(3)
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
+    @user = User.find(params[:id])
 		if @user.update(user_params)
 			redirect_to user_path(@user), notice: "ユーザー情報を更新しました。"
 		else
@@ -42,5 +43,9 @@ class UsersController < ApplicationController
   end
   def admin_user
     redirect_to(root_path) unless current_user.admin?
+  end
+  def set_user
+    @user = User.find(params[:id])
+    redirect_to users_path if @user.admin?
   end
 end
