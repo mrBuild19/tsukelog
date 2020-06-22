@@ -17,6 +17,15 @@
 //= require_tree .
 //= require bootstrap.min.js
 
+$(document).on("turbolinks:load", function() {
+    // jQuery Upload Thumbs
+    $('form input:file').uploadThumbs({
+        position : 0,      // 0:before, 1:after, 2:parent.prepend, 3:parent.append,
+                           // any: arbitrarily jquery selector
+    });
+});
+
+
 $(document).on('turbolinks:load', function() {
 $(function(){
   //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
@@ -36,13 +45,6 @@ $(function(){
       return function(e) {
         //既存のプレビューを削除
         $subimageboxs.empty();
-        // .prevewの領域の中にロードした画像を表示するimageタグを追加
-        $subimageboxs.append($('<img>').attr({
-                  src: e.target.result,
-                  width: "150px",
-                  class: "form_sub",
-                  title: file.name
-              }));
       };
     })(file);
 
@@ -50,6 +52,7 @@ $(function(){
   });
 });
 });
+
 
 
 // TODO DRY原則。変数を用いて、最小限まで減らす。

@@ -12,9 +12,9 @@
                         <% end %>
                     </div>
                     <div class="form_sub">
-                        <span class="btn btn-primary">画像を選択
-                            	<%= f.attachment_field :post_images_images, multiple: true, class: 'form-control-file', style: 'display: none' %>
-                        </span>
+                        <div class="form_sub">
+		                    <%= f.attachment_field :post_images_images, multiple: true, class: 'form-control-file' %>
+		                </div>
                     </div>
                     </label>
                 </div>
