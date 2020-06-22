@@ -1,4 +1,7 @@
 <div class="container">
+    <%= render "shared/notice", notice: notice %>
+    <%= render "shared/alert", alert: alert %>
+
     <div class="row media">
         <div class="post-left d-flex mr-3">
             <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x150" %>

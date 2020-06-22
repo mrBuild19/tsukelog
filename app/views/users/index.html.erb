@@ -1,4 +1,7 @@
 <div class="container">
+	<%= render "shared/notice", notice: notice %>
+	<%= render "shared/alert", alert: alert %>
+
 	<div id="jscroll">
 		<%= render "user_list", users: @users %>
 		<%= link_to_next_page @users, '次のページ', class: "next" %>
