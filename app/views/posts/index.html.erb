@@ -36,7 +36,7 @@
 			</div>
 
 			<!-- 新着 -->
-			<div class="tab-pane fade show" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
+			<div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
 	  			<div id="arrival-jscroll">
 	  				<!-- TODO 部分テンプレート化 -->
 	  				<div class="arrival-jscroll">
@@ -54,7 +54,7 @@
 		  	</div>
 
 		  	<!-- 人気 -->
-			<div class="tab-pane fade show" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+			<div class="tab-pane fade show active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
 				<div id="popular-jscroll">
 					<!-- TODO 部分テンプレート化 -->
 	  				<div class="popular-jscroll">
@@ -73,3 +73,10 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$("#arrival").removeClass("active");
+	$("#arrival").removeClass("show");
+	$("#popular").removeClass("active");
+	$("#popular").removeClass("show");
+</script>

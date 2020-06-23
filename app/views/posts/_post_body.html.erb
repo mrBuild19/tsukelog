@@ -7,9 +7,15 @@
 		<% end %>
 	</div>
 	<div class="img" alt="Card image">
+		<div class="bxslider">
 		<% post.post_images.each do |image| %>
 			<p><%= attachment_image_tag image, :image, fallback: "no_image.jpg", size: "200x200" %>
 			</p>
 		<% end %>
+		</div>
 	</div>
 </div>
+
+<script>
+	onbxslider();
+</script>
