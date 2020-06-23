@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user, only: :destroy
-  before_action :set_user, only: [:show, :edit]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users =  User.where.not(admin: true).page(params[:page]).per(3)
@@ -14,10 +14,14 @@ class UsersController < ApplicationController
     @like_posts = @user.likes.page(params[:page]).per(3)
   end
 
-  def edit; end
+  def edit
+    if @user.admin?
+      flash[:alert] = "管理者ユーザーはプロフィール編集できません。"
+      redirect_back(fallback_location: users_path)
+    end
+  end
 
   def update
-    @user = User.find(params[:id])
 		if @user.update(user_params)
 			redirect_to user_path(@user), notice: "ユーザー情報を更新しました。"
 		else
@@ -26,9 +30,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:id])
-    user.destroy
-    flash[:alert] = "#{user.name}さんを削除しました。"
+    @user.destroy
+    flash[:alert] = "#{@user.name}さんを削除しました。"
     redirect_back(fallback_location: users_path)
   end
 
@@ -42,10 +45,9 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
   def admin_user
-    redirect_to(root_path) unless current_user.admin?
+    redirect_to(users_path) unless current_user.admin?
   end
   def set_user
     @user = User.find(params[:id])
-    redirect_to users_path if @user.admin?
   end
 end
