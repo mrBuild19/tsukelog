@@ -71,6 +71,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :text, :rate, :tag_list, post_images_images: [])
   end
   def admin_limit
-    redirect_to(posts_path) if current_user.admin?
+    if current_user.admin?
+      redirect_to posts_path, alert: "管理者ユーザーは新規投稿できません。"
+    end
   end
 end
