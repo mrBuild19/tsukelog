@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users =  User.where.not(admin: true).page(params[:page]).per(3)
+    @users =  User.where.not(id: current_user.id, admin: true).page(params[:page]).per(3)
   end
 
   def show
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @search = User.where.not(admin: true).ransack(params[:q])
+    @search = User.where.not(id: current_user.id, admin: true).ransack(params[:q])
     @search_users =  @search.result.page(params[:page])
   end
 

@@ -4,7 +4,7 @@ class RelationshipsController < ApplicationController
 	before_action :admin_limit
 
 	def follow
-		current_user.follow(@user.id)
+		current_user.follow(@user.id) if current_user != @user
 	end
 	def unfollow
 		current_user.unfollow(@user.id)
