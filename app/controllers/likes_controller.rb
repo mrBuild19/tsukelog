@@ -4,8 +4,10 @@ class LikesController < ApplicationController
 	before_action :admin_limit
 
 	def create
-		like = current_user.likes.new(post_id: @post.id)
-		like.save
+		if current_user != @post.user
+			like = current_user.likes.new(post_id: @post.id)
+			like.save
+		end
 	end
 	def destroy
 		like = current_user.likes.find_by(post_id: @post.id)
