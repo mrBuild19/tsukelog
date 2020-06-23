@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users =  User.where.not(admin: true).page(params[:page]).per(3)
+    @users =  User.where.not(id: current_user.id, admin: true).page(params[:page]).per(3)
   end
 
   def show
