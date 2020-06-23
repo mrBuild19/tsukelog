@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin_limit, only: [:new, :create]
 
   def index
     # フォローユーザーの投稿取得
@@ -67,5 +69,8 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :text, :rate, :tag_list, post_images_images: [])
+  end
+  def admin_limit
+    redirect_to(posts_path) if current_user.admin?
   end
 end
