@@ -6,9 +6,11 @@
 
 	<div class="row media">
 		<div class="post-left d-flex mr-3">
+			<div class="bxslider">
 			<% @post.post_images.each do |image| %>
 				<%= attachment_image_tag image, :image, fallback: "no_image.jpg", size: "200x200" %>
 			<% end %>
+			</div>
 		</div>
 
 		<div class="post-right media-body">

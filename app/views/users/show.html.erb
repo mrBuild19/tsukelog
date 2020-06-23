@@ -81,7 +81,7 @@
             </div>
 
             <!-- フォロワーリスト -->
-            <div class="tab-pane fade show follower-jscroll" id="follower" role="tabpanel" aria-labelledby="follower-tab">
+            <div class="tab-pane fade show" id="follower" role="tabpanel" aria-labelledby="follower-tab">
                 <div id="follower-jscroll">
                     <!-- TODO 部分テンプレート化 -->
                     <div class="follower-jscroll">
@@ -98,7 +98,7 @@
             </div>
 
             <!-- いいねした投稿 -->
-            <div class="tab-pane fade show" id="like" role="tabpanel" aria-labelledby="like-tab">
+            <div class="tab-pane fade show active" id="like" role="tabpanel" aria-labelledby="like-tab">
                 <% unless @like_posts.blank? %>
                     <div id="like-jscroll">
                         <!-- TODO 部分テンプレート化 -->
@@ -121,3 +121,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    $("#like").removeClass("active");
+    $("#like").removeClass("show");
+</script>
