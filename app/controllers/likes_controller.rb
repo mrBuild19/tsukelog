@@ -17,6 +17,6 @@ class LikesController < ApplicationController
 		@post = Post.find(params[:post_id])
 	end
 	def admin_limit
-    	redirect_back(fallback_location: post_path(@post)) if current_user.admin?
+    	redirect_back(fallback_location: posts_path) if current_user.admin?
   	end
 end
