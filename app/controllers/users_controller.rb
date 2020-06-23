@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @search = User.where.not(admin: true).ransack(params[:q])
+    @search = User.where.not(id: current_user.id, admin: true).ransack(params[:q])
     @search_users =  @search.result.page(params[:page])
   end
 
