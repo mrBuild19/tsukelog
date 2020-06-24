@@ -20,26 +20,26 @@
 		<div class="tab-content w-100">
 			<!-- タイムライン -->
 		  	<div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
-		  		<div id="timeline-jscroll">
+		  		<div id="timeline-scroll">
 		  			<!-- TODO 部分テンプレート化 -->
-		  			<div class="timeline-jscroll">
+		  			<div class="timeline-scroll">
 						<div class="row">
 							<% @timeline_posts.each do |post| %>
 								<%= render "post_card", post: post %>
 							<% end %>
 						</div>
 					</div>
+					<%= link_to_next_page @timeline_posts, '次のページ', class: "timeline-next" %>
 				</div>
 				<!-- TODO 部分テンプレート化 -->
-				<%= link_to_next_page @timeline_posts, '次のページ', class: "timeline-next" %>
 				<%= render "shared/scroll_setting" %>
 			</div>
 
 			<!-- 新着 -->
 			<div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
-	  			<div id="arrival-jscroll">
+	  			<div id="arrival-scroll">
 	  				<!-- TODO 部分テンプレート化 -->
-	  				<div class="arrival-jscroll">
+	  				<div class="arrival-scroll">
 						<div class="row">
 							<% @arrival_posts.each do |post| %>
 								<%= render "post_card", post: post %>
@@ -55,9 +55,9 @@
 
 		  	<!-- 人気 -->
 			<div class="tab-pane fade show active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
-				<div id="popular-jscroll">
+				<div id="popular-scroll">
 					<!-- TODO 部分テンプレート化 -->
-	  				<div class="popular-jscroll">
+	  				<div class="popular-scroll">
 						<div class="row">
 							<% @popular_posts.each do |post| %>
 								<%= render "post_card", post: post %>

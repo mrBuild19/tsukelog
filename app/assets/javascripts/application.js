@@ -74,65 +74,82 @@ $(document).on('turbolinks:load', function() {
 // TODO BUG 次のページがない時の処理
 // 投稿一覧画面タイムラインタブ
 $(document).on("turbolinks:load", function() {
-  $("#timeline-jscroll").infiniteScroll({
-    path: "a.timeline-next",
-    append: ".timeline-jscroll",
-    hideNav: "a.timeline-next",
-    scrollThreshold: true,
-    history: false,
-    prefill: true,
-    status: ".page-load-status"
-  });
+  if ( $('#timeline-scroll').find('.timeline-next').length ){
+    $("#timeline-scroll").infiniteScroll({
+      path: "a.timeline-next",
+      append: ".timeline-scroll",
+      hideNav: "a.timeline-next",
+      scrollThreshold: true,
+      history: false,
+      prefill: false,
+      status: ".page-load-status"
+    });
+  }
 });
 
 // 投稿一覧画面新着タブ
 $(document).on("turbolinks:load", function() {
-  $("#arrival-jscroll").infiniteScroll({
-    path: "a.arrival-next",
-    append: ".arrival-jscroll",
-    hideNav: "a.arrival-next",
-    button: ".arrival-button",
-    scrollThreshold: false,
-    history: false,
-    prefill: false,
-    status: ".page-load-status"
-  });
+  if ( $('#arrival-scroll').find('.arrival-next').length ){
+    $("#arrival-scroll").infiniteScroll({
+      path: "a.arrival-next",
+      append: ".arrival-scroll",
+      hideNav: "a.arrival-next",
+      button: ".arrival-button",
+      scrollThreshold: false,
+      history: false,
+      prefill: false,
+      status: ".page-load-status"
+    });
+  }
+  else {
+    $('.arrival-button').hide();
+  }
 });
 
 // 投稿一覧画面人気タブ
 $(document).on("turbolinks:load", function() {
-  $("#popular-jscroll").infiniteScroll({
-    path: "a.popular-next",
-    append: ".popular-jscroll",
-    hideNav: "a.popular-next",
-    button: ".popular-button",
-    scrollThreshold: false,
-    history: false,
-    prefill: false,
-    status: ".page-load-status"
-  });
+  if ( $('#popular-scroll').find('.popular-next').length ){
+    $("#popular-scroll").infiniteScroll({
+      path: "a.popular-next",
+      append: ".popular-scroll",
+      hideNav: "a.popular-next",
+      button: ".popular-button",
+      scrollThreshold: false,
+      history: false,
+      prefill: false,
+      status: ".page-load-status"
+    });
+  }
+  else {
+    $('.popular-button').hide();
+  }
 });
 
 // ユーザー一覧画面&検索画面(ユーザー&投稿)
 $(document).on("turbolinks:load", function() {
-  $("#jscroll").infiniteScroll({
-    path: "a.next",
-    append: ".jscroll",
-    hideNav: "a.next",
-    button: ".button",
-    scrollThreshold: false,
-    history: false,
-    prefill: false,
-    status: ".page-load-status"
-  });
+  if ( $('#scroll').find('.next').length ){
+    $("#scroll").infiniteScroll({
+      path: "a.next",
+      append: ".scroll",
+      hideNav: "a.next",
+      button: ".button",
+      scrollThreshold: false,
+      history: false,
+      prefill: false,
+      status: ".page-load-status"
+    });
+  }
+  else {
+    $('.button').hide();
+  }
 });
 
 // マイページ画面current_userの投稿タブ
 $(document).on("turbolinks:load", function() {
-  if ( $('#my-jscroll').find('.my-next').length ){
-    $("#my-jscroll").infiniteScroll({
+  if ( $('#my-scroll').find('.my-next').length ){
+    $("#my-scroll").infiniteScroll({
       path: "a.my-next",
-      append: ".my-jscroll",
+      append: ".my-scroll",
       hideNav: "a.my-next",
       button: ".my-button",
       scrollThreshold: false,
@@ -149,10 +166,10 @@ $(document).on("turbolinks:load", function() {
 
 // マイページ画面フォローリストタブ
 $(document).on("turbolinks:load", function() {
-  if ( $('#follow-jscroll').find('.follow-next').length ){
-    $("#follow-jscroll").infiniteScroll({
+  if ( $('#follow-scroll').find('.follow-next').length ){
+    $("#follow-scroll").infiniteScroll({
       path: "a.follow-next",
-      append: ".follow-jscroll",
+      append: ".follow-scroll",
       hideNav: "a.follow-next",
       button: ".follow-button",
       scrollThreshold: false,
@@ -168,10 +185,10 @@ $(document).on("turbolinks:load", function() {
 
 // マイページ画面フォロワーリストタブ
 $(document).on("turbolinks:load", function() {
-  if ( $('#follower-jscroll').find('.follower-next').length ){
-    $("#follower-jscroll").infiniteScroll({
+  if ( $('#follower-scroll').find('.follower-next').length ){
+    $("#follower-scroll").infiniteScroll({
       path: "a.follower-next",
-      append: ".follower-jscroll",
+      append: ".follower-scroll",
       hideNav: "a.follower-next",
       button: ".follower-button",
       scrollThreshold: false,
@@ -187,10 +204,10 @@ $(document).on("turbolinks:load", function() {
 
 // マイページ画面いいねした投稿タブ
 $(document).on("turbolinks:load", function() {
-  if ( $('#like-jscroll').find('.like-next').length ){
-    $("#like-jscroll").infiniteScroll({
+  if ( $('#like-scroll').find('.like-next').length ){
+    $("#like-scroll").infiniteScroll({
       path: "a.like-next",
-      append: ".like-jscroll",
+      append: ".like-scroll",
       hideNav: "a.like-next",
       button: ".like-button",
       scrollThreshold: false,
