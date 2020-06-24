@@ -24,3 +24,11 @@ form img.thumb {
     max-width:160px;
     vertical-align:bottom;
 }
+
+/* 文字を中央に揃える */
+.card-img-overlay{
+  padding: 0;
+  margin-top: 50px;
+  text-align: center;
+  font-weight: bold;
+}
