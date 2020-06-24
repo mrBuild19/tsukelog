@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :search
   before_action :admin_limit, only: [:new, :create]
 
   def index

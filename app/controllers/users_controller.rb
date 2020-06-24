@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :search]
   before_action :admin_user, only: :destroy
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users =  User.where.not(id: current_user.id, admin: true).page(params[:page]).per(3)
+    if user_signed_in?
+      @users =  User.where.not(id: current_user.id, admin: true).page(params[:page]).per(3)
+    else
+      @users =  User.where.not(admin: true).page(params[:page]).per(3)
+    end
   end
 
   def show
@@ -36,7 +40,11 @@ class UsersController < ApplicationController
   end
 
   def search
-    @search = User.where.not(id: current_user.id, admin: true).ransack(params[:q])
+    if user_signed_in?
+      @search = User.where.not(id: current_user.id, admin: true).ransack(params[:q])
+    else
+      @search = User.where.not(admin: true).ransack(params[:q])
+    end
     @search_users =  @search.result.page(params[:page])
   end
 
