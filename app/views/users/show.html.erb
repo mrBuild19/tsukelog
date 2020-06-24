@@ -44,9 +44,9 @@
             <!-- current_userの投稿 -->
             <div class="tab-pane fade show active" id="my" role="tabpanel" aria-labelledby="my-tab">
                 <% unless @my_posts.blank? %>
-                    <div id="my-jscroll">
+                    <div id="my-scroll">
                         <!-- TODO 部分テンプレート化 -->
-                        <div class="my-jscroll">
+                        <div class="my-scroll">
                             <div class="row">
                                 <% @my_posts.each do |my_post| %>
                                     <%= render "posts/post_card", post: my_post %>
@@ -65,9 +65,9 @@
 
             <!-- フォローリスト -->
             <div class="tab-pane fade show" id="follow" role="tabpanel" aria-labelledby="follow-tab">
-                <div id="follow-jscroll">
+                <div id="follow-scroll">
                     <!-- TODO 部分テンプレート化 -->
-                    <div class="follow-jscroll">
+                    <div class="follow-scroll">
                         <div class="row">
                             <% @follow_users.each do |follow_user| %>
                                 <%= render "users/user_card", user: follow_user %>
@@ -82,9 +82,9 @@
 
             <!-- フォロワーリスト -->
             <div class="tab-pane fade show" id="follower" role="tabpanel" aria-labelledby="follower-tab">
-                <div id="follower-jscroll">
+                <div id="follower-scroll">
                     <!-- TODO 部分テンプレート化 -->
-                    <div class="follower-jscroll">
+                    <div class="follower-scroll">
                         <div class="row">
                             <% @follower_users.each do |follower_user| %>
                                 <%= render "users/user_card", user: follower_user %>
@@ -100,9 +100,9 @@
             <!-- いいねした投稿 -->
             <div class="tab-pane fade show active" id="like" role="tabpanel" aria-labelledby="like-tab">
                 <% unless @like_posts.blank? %>
-                    <div id="like-jscroll">
+                    <div id="like-scroll">
                         <!-- TODO 部分テンプレート化 -->
-                        <div class="like-jscroll">
+                        <div class="like-scroll">
                             <div class="row">
                                 <% @like_posts.each do |like_post| %>
                                     <%= render "posts/post_card", post: like_post.post %>
