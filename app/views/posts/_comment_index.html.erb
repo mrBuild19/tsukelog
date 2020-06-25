@@ -1,10 +1,11 @@
 <% post.post_comments.each do |post_comment| %>
-	<li class="list-unstyled">
-		<%= post_comment.comment %>
-		<%= post_comment.user.name %>
-		<%= post_comment.created_at %>
+	<div class="comment ml-5">
+		<span><%= post_comment.comment %></span>
+
+		<span class="text-right"><%= post_comment.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+		<span class="mx-2"><%= post_comment.user.name %></span>
 		<% if current_user == @post.user || current_user.admin? %>
-			<%= link_to '削除', post_post_comment_path(post, post_comment), method: :delete, remote: true, class: 'btn btn-danger' %>
+			<%= link_to '削除', post_post_comment_path(post, post_comment), method: :delete, remote: true, class: 'btn btn-outline-danger' %>
 		<% end %>
-	</li>
+	</div>
 <% end %>
