@@ -1,0 +1,17 @@
+<div class="card-body p-0">
+	<div class="img" alt="Card image">
+		<%= attachment_image_tag post.post_images.first, :image, fallback: "no_image.jpg", size: "360x360", class: "rounded-lg" %>
+	</div>
+	<div id="star-rate"></div>
+</div>
+
+<script>
+$('#star-rate').raty({
+	path: '/assets/',
+	size: 50,
+	half: true,
+	readOnly: true,
+	scoreName: 'post[rate]',
+	score: <%= post.rate %>
+})
+</script>
