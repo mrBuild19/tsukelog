@@ -3,9 +3,9 @@
 
     <div class="container my-3">
       <% if user_signed_in? %>
-        <%= link_to 'つけログ', root_path, class: "navbar-brand font-weight-bold" %>
-      <% else %>
         <%= link_to 'つけログ', posts_path, class: "navbar-brand font-weight-bold" %>
+      <% else %>
+        <%= link_to 'つけログ', root_path, class: "navbar-brand font-weight-bold" %>
       <% end %>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
