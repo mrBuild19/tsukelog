@@ -1,8 +1,10 @@
 <div class="card-body p-0">
-	<div class="img" alt="Card image">
-		<%= attachment_image_tag post.post_images.first, :image, fallback: "no_image.jpg", size: "360x360", class: "rounded-lg" %>
+	<div class="img bxslider" alt="Card image">
+		<% post.post_images.each do |image| %>
+			<%= attachment_image_tag image, :image, fallback: "no_image.jpg", size: "360x360", class: "rounded-lg" %>
+		<% end %>
 	</div>
-	<div id="star-rate"></div>
+	<div class="post-text"><%= post.text %></div>
 </div>
 
 <script>
