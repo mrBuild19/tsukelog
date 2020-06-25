@@ -1,9 +1,11 @@
 <div class="container">
-	<div class="row">
+	<div class="col-6 d-flex mx-auto">
 		<%= form_with model: @post, local: true do |f| %>
 			<%= render "shared/error_messages", model: f.object %>
 
-			<div class="post-left">
+			<h2 class="title d-flex"><span class="border-bottom mx-auto">新規投稿</span></h2>
+
+			<div class="post-image d-flex mt-3">
 				<div class="form-group">
 					<label>
 						<div class="form_main">
@@ -16,22 +18,28 @@
 				</div>
 			</div>
 
-			<div class="post-right">
+			<div class="post-title">
 				<div class="form-group">
-					<%= f.label :title %>
+					<%= f.label :title, "タイトル" %>
 					<%= f.text_field :title, class: 'form-control' %>
 				</div>
+			</div>
 
+			<div class="post-tag">
 				<div class="form-group">
-					<%= f.label :tag_list %>
+					<%= f.label :tag_list, "タグ" %>
 					<%= f.text_area :tag_list, value: @post.tag_list.join(','), class: 'form-control' %>
 				</div>
+			</div>
 
+			<div class="post-text">
 				<div class="form-group">
-					<%= f.label :text %>
+					<%= f.label :text, "本文" %>
 					<%= f.text_area :text, class: 'form-control' %>
 				</div>
+			</div>
 
+			<div class="post-rate">
 				<div class="form-group">
 					<%= f.hidden_field :rate, class: 'form-control' %>
 					<div id="star-rate"></div>
