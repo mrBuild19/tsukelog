@@ -1,10 +1,10 @@
 <div class="card-body p-0">
 	<div class="img bxslider" alt="Card image">
 		<% post.post_images.each do |image| %>
-			<%= attachment_image_tag image, :image, fallback: "no_image.jpg", size: "360x360", class: "rounded-lg" %>
+			<%= attachment_image_tag image, :image, fallback: "no_image.jpg", size: "550x550", class: "rounded-lg" %>
 		<% end %>
 	</div>
-	<div class="post-text"><%= post.text %></div>
+	<div class="post-text mt-3"><%= post.text %></div>
 </div>
 
 <script>

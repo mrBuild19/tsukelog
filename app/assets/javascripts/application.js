@@ -21,7 +21,7 @@ $(document).on("turbolinks:load", function() {
   $('.bxslider').bxSlider({
     adaptiveHeight: true,
     responsive: true,
-    slideWidth: 200
+    slideWidth: 550
   });
 });
 
