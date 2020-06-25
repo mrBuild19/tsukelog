@@ -1,9 +1,10 @@
 <div class="container">
-	<div class="row media">
+	<div class="col-6 d-flex mx-auto">
 		<%= form_with model: @post, local: true do |f| %>
 			<%= render "shared/error_messages", model: f.object %>
 
-			<div class="post-left d-flex mr-3">
+			<h2 class="title d-flex"><span class="border-bottom mx-auto">投稿編集</span></h2>
+			<div class="post-image d-flex mt-3">
 				<div class="form-group">
                     <label>
                     <div class="form_main">
@@ -20,31 +21,38 @@
                 </div>
 			</div>
 
-			<div class="media-body post-right">
+			<div class="post-title">
 				<div class="form-group">
-					<%= f.label :title %>
+					<%= f.label :tag_list, "タグ" %>
 					<%= f.text_field :title, class: 'form-control' %>
 				</div>
+			</div>
 
+			<div class="post-tag">
 				<div class="form-group">
 					<%= f.label :tag_list %>
 					<%= f.text_area :tag_list, value: @post.tag_list.join(','), class: 'form-control' %>
 				</div>
+			</div>
 
+			<div class="post-text">
 				<div class="form-group">
-					<%= f.label :text %>
+					<%= f.label :text, "本文" %>
 					<%= f.text_area :text, class: 'form-control' %>
 				</div>
+			</div>
 
+			<div class="post-rate">
 				<div class="form-group">
 					<%= f.hidden_field :rate, class: 'form-control' %>
 					<div id="star-rate"></div>
 				</div>
 			</div>
 
-			<br>
-			<%= link_to 'キャンセル', post_path %>
-			<%= f.submit '変更を保存', class: 'btn btn-primary' %>
+			<div class="submit mt-5">
+				<%= link_to 'キャンセル', post_path, class: "btn btn-outline-dark" %>
+				<%= f.submit '変更を保存', class: 'btn-lg btn-outline-dark ml-3' %>
+			</div>
 		<% end %>
 	</div>
 </div>
