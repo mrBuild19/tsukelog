@@ -2,6 +2,8 @@
 	<%= render "shared/notice", notice: notice %>
 	<%= render "shared/alert", alert: alert %>
 
+	<h2 class="title d-flex"><span class="border-bottom mx-auto mb-5">すべてのユーザー</span></h2>
+
 	<div id="scroll">
 		<%= render "user_list", users: @users %>
 		<%= link_to_next_page @users, '次のページ', class: "next" %>
