@@ -2,7 +2,11 @@
   <div class="navbar navbar-expand-md navbar-light">
 
     <div class="container my-3">
-      <%= link_to 'つけログ', root_path, class: "navbar-brand font-weight-bold" %>
+      <% if user_signed_in? %>
+        <%= link_to 'つけログ', root_path, class: "navbar-brand font-weight-bold" %>
+      <% else %>
+        <%= link_to 'つけログ', posts_path, class: "navbar-brand font-weight-bold" %>
+      <% end %>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -16,16 +20,13 @@
         <ul class="navbar-nav">
           <% if user_signed_in? %>
             <li class="nav-item">
-              <%= link_to 'ユーザー', users_path, class: "nav-link text-dark" %>
+              <%= link_to user_path(current_user), class: "nav-link p-0" do %><%= attachment_image_tag current_user, :profile_image, fallback: "no_image.jpg", size: "45x45", class: "rounded-circle" %><% end %>
             </li>
             <li class="nav-item">
               <%= link_to 'マイページ', user_path(current_user.id), class: "nav-link text-dark" %>
             </li>
             <li class="nav-item">
-              <%= link_to '投稿一覧', posts_path, class: "nav-link　text-dark" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '新規投稿', new_post_path, class: "nav-link text-dark" %>
+              <%= link_to new_post_path, class: "nav-link text-dark" do %><i class="fas fa-edit"></i><% end %>
             </li>
           <% else %>
             <li class="nav-item">
