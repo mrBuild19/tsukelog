@@ -4,66 +4,48 @@
 	<% end %>
 	<%= render "shared/notice", notice: notice %>
 
-	<div class="row media">
-		<div class="post-left d-flex mr-3">
-			<div class="bxslider">
-			<% @post.post_images.each do |image| %>
-				<%= attachment_image_tag image, :image, fallback: "no_image.jpg", size: "200x200" %>
-			<% end %>
-			</div>
-		</div>
-
-		<div class="post-right media-body">
-			<p>タイトル</p>
-			<p><%= @post.title %></p>
-			<% @post.tag_list.each do |tag| %>
-				<p class="badge badge-primary mr-1 p-2">
-					<%= link_to tag, posts_path(tag_name: tag), class: "text-white" %>
-				</p>
-			<% end %>
-			<p>本文</p>
-			<p><%= @post.text %></p>
-			<br>
-			<div id="star-rate"></div>
+	<!-- ポストカード ヘッダー・ボディー -->
+	<div class="post-card col-7 mx-auto">
+		<div class="border-0 mt-3">
+			<%= render "posts/card_header", post: @post %>
+			<%= render "posts/timeline_card_body", post: @post %>
 		</div>
 	</div>
-	<br>
-	<div class="row">
-		<div class="post-status">
-			<li class="list-unstyled">
+
+	<!-- ポストカード フッター -->
+	<div class="post-foot col-7 d-flex mx-auto px-0 py-3 bg-white">
+		<div class="user_inf mr-auto ml-2">
+			<span class="img" alt="Card image">
+				<%= attachment_image_tag @post.user, :profile_image, fallback: "no_image.jpg", size: "55x55", class: "rounded-circle" %>
+			</span>
+			<span class="nav-item post-name ml-1" style="font-size: 1.1em;">
 				<%= @post.user.name %>
-				<%= @post.created_at %>
-				<span>コメント<%= @post.post_comments.count %> 件</span>
-
-				<div class="post_<%= @post.id %>">
-					<%= render "likes/like", post: @post %>
-				</div>
-			</li>
+			</span>
+		</div>
+		<div class="post_inf pt-4">
+			<span class="small text-secondary"><%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+			<span class="small text-secondary">コメント <%= @post.post_comments.count %> 件</span>
+			<div class="post_<%= @post.id %>"><%= render "likes/like", post: @post %></div>
 		</div>
 	</div>
-	<br>
-	<% if current_user == @post.user || current_user.admin? %>
-		<div class="row">
-			<li class="list-unstyled">
-				<%= link_to '削除', @post, method: :delete, class: 'btn btn-danger' %>
-				<%= link_to '投稿編集', edit_post_path(@post), class: 'btn btn-primary' %>
-			</li>
-		</div>
-	<% end %>
-	<br>
-	<br>
-	<div class="row">
+
+	<!-- 投稿編集・削除ボタン -->
+	<div class="link-destination col-7 d-flex mx-auto my-5">
+		<% if current_user == @post.user || current_user.admin? %>
+			<%= link_to '投稿編集', edit_post_path(@post), class: 'btn btn-outline-dark mx-auto' %>
+			<%= link_to '削除', @post, method: :delete, class: 'btn btn-outline-danger' %>
+		<% end %>
+	</div>
+
+	<!-- コメント -->
+	<div class="comment-form col-10 d-flex m-auto" style="margin-top: 80px;">
 		<%= render "posts/comment_form", post: @post, comments: @comments %>
 	</div>
-	<br>
-	<div class="row">
+	<div class="comment-title col-10 mt-4">
 		<h4>コメント一覧</h4>
 	</div>
-	<br>
-	<div class="row">
-		<div class="comment_index">
-			<%= render "posts/comment_index", post: @post %>
-		</div>
+	<div class="comment-index col-10 mr-0">
+		<%= render "posts/comment_index", post: @post %>
 	</div>
 </div>
 

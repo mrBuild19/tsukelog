@@ -1,10 +1,16 @@
 <div class="container">
-	<div class="row">
-		<h1>おいしいつけ麺をつけログで共有しよう!</h1>
-   </div>
+	<div class="row d-flex justify-content-center">
+		<div class="card w-75">
+		  <img class="card-img img-fluid " src="/assets/tsukemen-image1.png" alt="つけ麺のイメージ画像" style="height: 550px;">
+		  <div class="card-img-overlay">
+		    <p class="text-white" style="font-size: 2.5rem;">おいしいつけ麺をつけログで共有しよう!</p>
+		  </div>
+		</div>
+  </div>
 
- 	<div class="row">
-	 	<ul class="nav nav-pills nav-fill" role="tablist">
+ 	<div class="row mt-5">
+ 		<div class="nav-header mr-auto"><span class="h2 font-weight-bold">すべての投稿</span></div>
+	 	<ul class="nav nav-pills d-flex justify-content-end" role="tablist">
 		  <li class="nav-item">
 		    <a class="nav-link active" id="arrival-tab" data-toggle="tab" href="#arrival" role="tab" aria-controls="arrival" aria-selected="true">新着</a>
 		  </li>
@@ -14,8 +20,8 @@
 		</ul>
  	</div>
 
- 	<div class="row">
-		<div class="tab-content w-100">
+ 	<div class="row mt-2">
+		<div class="tab-content">
 		  <!-- 新着 -->
 			<div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
 	  			<div id="arrival-scroll">

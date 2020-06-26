@@ -1,0 +1,20 @@
+<div class="card-foot d-flex px-0 pt-0 pb-3 bg-white">
+	<div class="user_inf mr-auto">
+		<span class="img" alt="Card image">
+			<%= attachment_image_tag post.user, :profile_image, fallback: "no_image.jpg", size: "55x55", class: "rounded-circle" %>
+		</span>
+		<span class="nav-item post-name ml-1" style="font-size: 1.1em;">
+			<%= post.user.name %>
+		</span>
+	</div>
+
+	<div class="post_inf pt-4">
+		<% if user_signed_in? %>
+			<% if current_user.admin? %>
+				<%= link_to '削除', post_path(post, admin: "admin"), method: :delete, class: 'btn btn-danger' %>
+			<% end %>
+		<% end %>
+		<span class="small text-secondary">コメント <%= post.post_comments.count %> 件</span>
+		<span class="small text-secondary">いいね! <%= post.likes.count %></span>
+	</div>
+</div>
