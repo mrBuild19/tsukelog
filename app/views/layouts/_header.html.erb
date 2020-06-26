@@ -35,6 +35,40 @@
             </li>
           <% else %>
             <!-- ログイン前 -->
+            <!-- Button trigger modal -->
+            <li type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#about-tsuklog">about</li>
+
+            <!-- Modal -->
+            <div class="modal" id="about-tsuklog" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">つけログとは</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h3>サイトテーマ</h3>
+                      ・美味しいつけ麺の情報を他の人と共有できる。<br>
+                      ・つけ麺好きと繋がり、情報共有できる。<br>
+                    <h3 class="mt-3">ターゲットユーザ</h3>
+                      ・つけ麺が好きな人全員
+                    <h3 class="mt-3">主な利用シーン</h3>
+                      ・つけ麺の記事やレビューを投稿することができる。<br>
+                      ・高評価のつけ麺を知ることができる。<br>
+                      ・つけ麺好きの人と繋がることができる。<br>
+                    <h3 class="mt-3">投稿時のポイント</h3>
+                      ・画像を複数投稿したい場合は、Shiftキーを押しながら選択しください。<br>
+                      ・投稿に複数のタグを付けたい場合は、タグの間に「 , 」をつけてください。<br>
+                        (ex)「つけ麺」「こってり」 -> 「つけ麺, こってり」
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <li class="nav-item">
               <%= link_to 'ログイン', new_user_session_path, class: "nav-link text-dark" %>
             </li>
