@@ -5,9 +5,9 @@ class UsersController < ApplicationController
 
   def index
     if user_signed_in?
-      @users =  User.where.not(id: current_user.id, admin: true).page(params[:page]).per(3)
+      @users =  User.where.not(id: current_user.id, admin: true).page(params[:page]).per(9)
     else
-      @users =  User.where.not(admin: true).page(params[:page]).per(3)
+      @users =  User.where.not(admin: true).page(params[:page]).per(9)
     end
   end
 
