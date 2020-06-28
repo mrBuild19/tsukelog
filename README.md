@@ -24,8 +24,8 @@
 ## URL
 https://tsukelog.work
 - テストユーザー
-  - メールアドレス：
-  - パスワード：
+  - メールアドレス： testuser@gmail.com
+  - パスワード： testuser
 
 ## 言語・使用技術
 - フロントエンド
