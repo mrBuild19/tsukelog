@@ -13,7 +13,7 @@
 	<div class="post_inf pt-4">
 		<% if user_signed_in? %>
 			<% if current_user.admin? %>
-				<%= link_to '削除', post_path(post, admin: "admin"), method: :delete, class: 'btn btn-danger' %>
+				<%= link_to '削除', post_path(post, admin: "admin"), method: :delete, class: 'btn btn-danger btn-sm' %>
 			<% end %>
 		<% end %>
 		<%= link_to "コメント #{post.post_comments.count} 件", post_path(post), class: "small text-secondary" %>
