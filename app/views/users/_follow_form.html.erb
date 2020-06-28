@@ -1,5 +1,7 @@
-<% if current_user.following?(user) %>
-  <%= link_to 'フォロー外す', unfollow_path(user.id), method: :post, remote: true, class: 'btn btn-outline-primary' %>
-<% else %>
-  <%= link_to 'フォローする', follow_path(user.id), method: :post, remote: true, class: 'btn btn-outline-primary' %>
+<% if user_signed_in? %>
+	<% if current_user.following?(user) %>
+  		<%= link_to 'フォロー中', unfollow_path(user.id), method: :post, remote: true, class: 'btn btn-primary rounded-pill d-flex align-items-center justify-content-center' %>
+	<% else %>
+  		<%= link_to 'フォロー', follow_path(user.id), method: :post, remote: true, class: 'btn btn-primary rounded-pill d-flex align-items-center justify-content-center' %>
+  	<% end %>
 <% end %>

@@ -1,49 +1,49 @@
 <div class="container">
-    <div class="row media">
-        <div class="post-left d-flex mr-3">
-            <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x150" %>
+    <%= render "shared/notice", notice: notice %>
+    <%= render "shared/alert", alert: alert %>
+
+    <div class="media col-6 d-flex mx-auto my-5">
+        <div class="user-image col-4 d-flex">
+            <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "150x150", class: "rounded-circle" %>
         </div>
-        <div class="post-right media-body">
-            <p><%= @user.name %></p>
+        <div class="user-inf media-body col-8">
+            <p><u><%= @user.name %></u></p>
             <% if user_signed_in? && @user != current_user %>
                 <div class="follow_<%= @user.id %>">
                     <%= render "users/follow_form", user: @user %>
                 </div>
             <% else %>
-                <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary' %>
-                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+                <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-outline-dark' %>
+                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
             <% end %>
-            <p><%= @user.introduction %></p>
+            <u><%= @user.introduction %></u>
         </div>
     </div>
-
-    <br>
-    <div class="row">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="my-tab" data-toggle="tab" href="#my" role="tab" aria-controls="my" aria-selected="true">投稿 <%= @user.posts.count %></a>
+    <div class="row mt-5">
+        <ul class="nav nav-pills col-8 mx-auto mt-5 p-0" role="tablist">
+            <li class="nav-item col-3 p-0">
+                <a class="nav-link active  px-0 border text-center border" id="my-tab" data-toggle="tab" href="#my" role="tab" aria-controls="my" aria-selected="true">投稿 <%= @user.posts.count %></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="follow-tab" data-toggle="tab" href="#follow" role="tab" aria-controls="follow" aria-selected="false">フォロー <%= @user.follower.count %></a>
+            <li class="nav-item col-3 p-0">
+                <a class="nav-link  px-0 border text-center border" id="follow-tab" data-toggle="tab" href="#follow" role="tab" aria-controls="follow" aria-selected="false">フォロー <%= @user.follower.count %></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="follower-tab" data-toggle="tab" href="#follower" role="tab" aria-controls="follower" aria-selected="false">フォロワー <%= @user.followed.count %></a>
+            <li class="nav-item col-3 p-0">
+                <a class="nav-link  px-0 border text-center border" id="follower-tab" data-toggle="tab" href="#follower" role="tab" aria-controls="follower" aria-selected="false">フォロワー <%= @user.followed.count %></a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" id="like-tab" data-toggle="tab" href="#like" role="tab" aria-controls="like" aria-selected="false">いいね <%= @user.likes.count %></a>
+            <li class="nav-item col-3 p-0">
+            <a class="nav-link  px-0 border text-center border" id="like-tab" data-toggle="tab" href="#like" role="tab" aria-controls="like" aria-selected="false">いいね <%= @user.likes.count %></a>
             </li>
         </ul>
     </div>
-    <br />
 
-    <div class="row">
+    <div class="row mt-5">
         <div class="tab-content w-100">
             <!-- current_userの投稿 -->
             <div class="tab-pane fade show active" id="my" role="tabpanel" aria-labelledby="my-tab">
                 <% unless @my_posts.blank? %>
-                    <div id="my-jscroll">
+                    <div id="my-scroll">
                         <!-- TODO 部分テンプレート化 -->
-                        <div class="my-jscroll">
+                        <div class="my-scroll">
                             <div class="row">
                                 <% @my_posts.each do |my_post| %>
                                     <%= render "posts/post_card", post: my_post %>
@@ -62,9 +62,9 @@
 
             <!-- フォローリスト -->
             <div class="tab-pane fade show" id="follow" role="tabpanel" aria-labelledby="follow-tab">
-                <div id="follow-jscroll">
+                <div id="follow-scroll">
                     <!-- TODO 部分テンプレート化 -->
-                    <div class="follow-jscroll">
+                    <div class="follow-scroll">
                         <div class="row">
                             <% @follow_users.each do |follow_user| %>
                                 <%= render "users/user_card", user: follow_user %>
@@ -78,10 +78,10 @@
             </div>
 
             <!-- フォロワーリスト -->
-            <div class="tab-pane fade show follower-jscroll" id="follower" role="tabpanel" aria-labelledby="follower-tab">
-                <div id="follower-jscroll">
+            <div class="tab-pane fade show" id="follower" role="tabpanel" aria-labelledby="follower-tab">
+                <div id="follower-scroll">
                     <!-- TODO 部分テンプレート化 -->
-                    <div class="follower-jscroll">
+                    <div class="follower-scroll">
                         <div class="row">
                             <% @follower_users.each do |follower_user| %>
                                 <%= render "users/user_card", user: follower_user %>
@@ -95,11 +95,11 @@
             </div>
 
             <!-- いいねした投稿 -->
-            <div class="tab-pane fade show" id="like" role="tabpanel" aria-labelledby="like-tab">
+            <div class="tab-pane fade show active" id="like" role="tabpanel" aria-labelledby="like-tab">
                 <% unless @like_posts.blank? %>
-                    <div id="like-jscroll">
+                    <div id="like-scroll">
                         <!-- TODO 部分テンプレート化 -->
-                        <div class="like-jscroll">
+                        <div class="like-scroll">
                             <div class="row">
                                 <% @like_posts.each do |like_post| %>
                                     <%= render "posts/post_card", post: like_post.post %>
@@ -118,3 +118,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    $("#like").removeClass("active");
+    $("#like").removeClass("show");
+</script>

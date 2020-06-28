@@ -1,32 +1,39 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>会員の方はこちらからログイン</h2>
+  <h2 class="title d-flex"><span class="border-bottom mx-auto mb-5">会員の方はこちらからログイン</span></h2>
 
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "current-password" %>
-        </div>
-
-        <% if devise_mapping.rememberable? %>
-          <div class="field">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
-          </div>
-        <% end %>
-
-        <div class="actions">
-          <%= f.submit "ログイン", class: "btn btn-primary btn-lg" %>
-        </div>
-      <% end %>
-
-      <%= render "devise/shared/links" %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="col-8 d-flex mx-auto">
+      <div class="form-group mx-auto">
+        <%= f.label :email %>
+        <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
     </div>
+
+    <div class="col-8 d-flex mx-auto">
+      <div class="form-group mx-auto">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-8 d-flex mx-auto">
+      <div class="form-group mx-auto">
+        <% if devise_mapping.rememberable? %>
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-8 d-flex mx-auto">
+      <div class="submit mx-auto">
+        <%= f.submit "ログイン", class: "btn btn-outline-primary btn-lg" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="help text-right">
+    <%= render "devise/shared/links" %>
   </div>
+
 </div>

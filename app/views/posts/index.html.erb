@@ -1,45 +1,48 @@
 <div class="container">
-	<div class="row">
-		<ul class="nav nav-pills nav-fill" role="tablist">
-		  <li class="nav-item">
-		    <a class="nav-link active" id="timeline-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="timeline" aria-selected="true">タイムライン</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" id="arrival-tab" data-toggle="tab" href="#arrival" role="tab" aria-controls="arrival" aria-selected="false">新着</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">人気</a>
-		  </li>
-		</ul>
-	</div>
+	<%= render "shared/notice", notice: notice %>
+    <%= render "shared/alert", alert: alert %>
 
-	<div class="row">
+
+	<ul class="nav nav-pills col-8 mx-auto mt-1 p-0" role="tablist">
+	  <li class="nav-item col-4 p-0">
+	    <a class="nav-link active px-0 border text-center border" id="timeline-tab" data-toggle="pill" href="#timeline" role="tab" aria-controls="timeline" aria-selected="true">タイムライン</a>
+	  </li>
+	  <li class="nav-item col-4 p-0">
+	    <a class="nav-link px-0 border text-center border" id="arrival-tab" data-toggle="pill" href="#arrival" role="tab" aria-controls="arrival" aria-selected="false">新着</a>
+	  </li>
+	  <li class="nav-item col-4 p-0">
+	    <a class="nav-link px-0 border text-center border" id="popular-tab" data-toggle="pill" href="#popular" role="tab" aria-controls="popular" aria-selected="false">人気</a>
+	  </li>
+	</ul>
+
+
+	<div class="row mt-5">
 		<div class="tab-content w-100">
 			<!-- タイムライン -->
 		  	<div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
-		  		<div id="timeline-jscroll">
+		  		<div id="timeline-scroll">
 		  			<!-- TODO 部分テンプレート化 -->
-		  			<div class="timeline-jscroll">
+		  			<div class="timeline-scroll">
 						<div class="row">
 							<% @timeline_posts.each do |post| %>
-								<%= render "post_card", post: post %>
+								<%= render "posts/timeline_card", post: post %>
 							<% end %>
 						</div>
 					</div>
+					<%= link_to_next_page @timeline_posts, '次のページ', class: "timeline-next" %>
 				</div>
 				<!-- TODO 部分テンプレート化 -->
-				<%= link_to_next_page @timeline_posts, '次のページ', class: "timeline-next" %>
 				<%= render "shared/scroll_setting" %>
 			</div>
 
 			<!-- 新着 -->
-			<div class="tab-pane fade show" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
-	  			<div id="arrival-jscroll">
+			<div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
+	  			<div id="arrival-scroll">
 	  				<!-- TODO 部分テンプレート化 -->
-	  				<div class="arrival-jscroll">
+	  				<div class="arrival-scroll">
 						<div class="row">
 							<% @arrival_posts.each do |post| %>
-								<%= render "post_card", post: post %>
+								<%= render "posts/post_card", post: post %>
 							<% end %>
 						</div>
 					</div>
@@ -51,13 +54,13 @@
 		  	</div>
 
 		  	<!-- 人気 -->
-			<div class="tab-pane fade show" id="popular" role="tabpanel" aria-labelledby="popular-tab">
-				<div id="popular-jscroll">
+			<div class="tab-pane fade show active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+				<div id="popular-scroll">
 					<!-- TODO 部分テンプレート化 -->
-	  				<div class="popular-jscroll">
+	  				<div class="popular-scroll">
 						<div class="row">
 							<% @popular_posts.each do |post| %>
-								<%= render "post_card", post: post %>
+								<%= render "posts/post_card", post: post %>
 							<% end %>
 						</div>
 					</div>
@@ -70,3 +73,10 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$("#arrival").removeClass("active");
+	$("#arrival").removeClass("show");
+	$("#popular").removeClass("active");
+	$("#popular").removeClass("show");
+</script>

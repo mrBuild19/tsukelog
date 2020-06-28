@@ -1,12 +1,17 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :search]
+  before_action :admin_user, only: :destroy
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users =  User.page(params[:page]).per(3)
+    if user_signed_in?
+      @users =  User.where.not(id: current_user.id, admin: true).page(params[:page]).per(9)
+    else
+      @users =  User.where.not(admin: true).page(params[:page]).per(9)
+    end
   end
 
   def show
-  	@user = User.find(params[:id])
     @my_posts =  @user.posts.order(created_at: "DESC").page(params[:page]).per(3)
     @follow_users = @user.following_user.page(params[:page]).per(3)
     @follower_users = @user.followers_user.page(params[:page]).per(3)
@@ -14,32 +19,43 @@ class UsersController < ApplicationController
   end
 
   def edit
-  	@user = User.find(params[:id])
+    if @user.admin?
+      flash[:alert] = "管理者ユーザーはプロフィール編集できません。"
+      redirect_back(fallback_location: users_path)
+    end
   end
 
   def update
-  	@user = User.find(params[:id])
 		if @user.update(user_params)
-			redirect_to user_path(@user)
+			redirect_to user_path(@user), notice: "ユーザー情報を更新しました。"
 		else
 			render :edit
 		end
   end
 
   def destroy
-    user = User.find(params[:id])
-    user.destroy
-    flash[:notice] = "#{user.name}さんを削除しました。"
+    @user.destroy
+    flash[:alert] = "#{@user.name}さんを削除しました。"
     redirect_back(fallback_location: users_path)
   end
 
   def search
-    @search = User.ransack(params[:q])
+    if user_signed_in?
+      @search = User.where.not(id: current_user.id, admin: true).ransack(params[:q])
+    else
+      @search = User.where.not(admin: true).ransack(params[:q])
+    end
     @search_users =  @search.result.page(params[:page])
   end
 
   private
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
+  end
+  def admin_user
+    redirect_to(users_path) unless current_user.admin?
+  end
+  def set_user
+    @user = User.find(params[:id])
   end
 end

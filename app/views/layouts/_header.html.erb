@@ -1,0 +1,83 @@
+<header>
+  <div class="navbar navbar-expand-md navbar-light">
+
+    <div class="container my-3">
+      <% if user_signed_in? %>
+        <%= link_to 'つけログ', posts_path, class: "navbar-brand font-weight-bold" %>
+      <% else %>
+        <%= link_to 'つけログ', root_path, class: "navbar-brand font-weight-bold" %>
+      <% end %>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <%= link_to search_posts_path, class: "text-dark nav-link" do %><i class="fas fa-search"></i><% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_path, class: "nav-link text-dark" do %><i class="fas fa-user-friends"></i><% end %>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <!-- ログイン後 -->
+            <li class="nav-item">
+              <%= link_to user_path(current_user), class: "nav-link p-0" do %>
+                <%= attachment_image_tag current_user, :profile_image, fallback: "no_image.jpg", size: "45x45", class: "rounded-circle" %>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to current_user.name, user_path(current_user), class: "nav-link text-dark" %>
+            </li>
+            <li class="nav-item ml-4">
+              <%= link_to new_post_path, class: "nav-link text-dark btn btn-outline-dark" do %>
+                <i class="fas fa-edit"></i>投稿
+              <% end %>
+            </li>
+          <% else %>
+            <!-- ログイン前 -->
+            <!-- Button trigger modal -->
+            <li type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#about-tsuklog">about</li>
+
+            <!-- Modal -->
+            <div class="modal" id="about-tsuklog" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">つけログとは</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h3>サイトテーマ</h3>
+                      ・美味しいつけ麺の情報を他の人と共有できる。<br>
+                      ・つけ麺好きと繋がり、情報共有できる。<br>
+                    <h3 class="mt-3">ターゲットユーザ</h3>
+                      ・つけ麺が好きな人全員
+                    <h3 class="mt-3">主な利用シーン</h3>
+                      ・つけ麺の記事やレビューを投稿することができる。<br>
+                      ・高評価のつけ麺を知ることができる。<br>
+                      ・つけ麺好きの人と繋がることができる。<br>
+                    <h3 class="mt-3">投稿時のポイント</h3>
+                      ・画像を複数投稿したい場合は、Shiftキーを押しながら選択しください。<br>
+                      ・投稿に複数のタグを付けたい場合は、タグの間に「 , 」をつけてください。<br>
+                        (ex)「つけ麺」「こってり」 -> 「つけ麺, こってり」
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <li class="nav-item">
+              <%= link_to 'ログイン', new_user_session_path, class: "nav-link text-dark" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to '新規登録', new_user_registration_path, class: "btn btn-outline-dark" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,4 +1,6 @@
-<%= form_with model: [@post, @comment] do |f| %>
-	<%= f.text_field :comment, class: "textarea" %>
-	<%= f.submit 'コメントする', class: "btn btn-warning" %>
-<% end %>
+<div class="mx-auto">
+	<%= form_with model: [post, comments] do |f| %>
+		<%= f.text_field :comment, class: "textarea" %><br>
+		<%= f.submit 'コメントする', class: "btn btn-warning text-white mt-3" %>
+	<% end %>
+</div>
