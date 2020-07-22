@@ -119,9 +119,9 @@ User.create!(name:  "福良P",
              password_confirmation: "tttttt",
              admin: false)
 
-# テストユーザー
-User.create!(name:  "テストユーザー",
-             email: "testuser@gmail.com",
-             password:  "testuser",
-             password_confirmation: "testuser",
+# ゲストユーザー
+User.create!(name:  "ゲストユーザー",
+             email: "guest_user@gmail.com",
+             password:  "guest_user",
+             password_confirmation: "guest_user",
              admin: false)
