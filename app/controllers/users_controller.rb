@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :search]
-  before_action :admin_user, only: :destroy
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: :destroy
+  before_action :check_guest, only: :destroy
 
   def index
     if user_signed_in?
@@ -52,10 +53,18 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
   def admin_user
     redirect_to(users_path) unless current_user.admin?
   end
-  def set_user
-    @user = User.find(params[:id])
+
+  def check_guest
+    if @user.email == "guest_user@gmail.com"
+      redirect_to posts_path, alert: "ゲストユーザーは削除できません。"
+    end
   end
 end
