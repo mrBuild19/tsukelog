@@ -34,4 +34,9 @@ class User < ApplicationRecord
   def following?(user)
   	following_user.include?(user)
   end
+
+  # ゲストユーザー取得
+  def self.guest
+    find_by(email: 'guest_user@gmail.com')
+  end
 end
