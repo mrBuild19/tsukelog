@@ -50,7 +50,6 @@ gem "refile-mini_magick"
 # Bootstrap
 gem 'bootstrap', '~> 4.5.0'
 
-
 gem 'font-awesome-sass', '~> 5.13.0'
 
 # タグ付け用のgem
@@ -70,6 +69,7 @@ gem 'dotenv-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'rspec-rails', '~> 3.7.0'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
