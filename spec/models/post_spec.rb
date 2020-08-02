@@ -5,7 +5,7 @@ RSpec.describe Post, type: :model do
 	describe "Valid Post" do
 
 	  	# ユーザーID、タイトル、レートがあれば有効な状態であること
-	    it "is valid with an post_id, title, rate" do
+	    it "is valid with an uesr_id, title, rate" do
 	    	expect(FactoryBot.build(:post)).to be_valid
 	    end
 
