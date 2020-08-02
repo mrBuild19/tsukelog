@@ -18,7 +18,7 @@ RSpec.describe Post, type: :model do
 	describe "Invalid Post" do
 
 	    # ユーザーIDがなければ無効な状態であること
-	    it "is invalid without a user_id" do
+	    it "is invalid without an user_id" do
 	    	post = FactoryBot.build(:post, user_id: nil)
 	    	post.valid?
 	    	expect(post.errors[:user_id]).to include("を入力してください")
