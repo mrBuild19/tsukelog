@@ -13,7 +13,7 @@ RSpec.describe Like, type: :model do
 	    end
 	end
 
-	describe 'Valid Like' do
+	describe 'InValid Like' do
 
 	    # ユーザーIDがなければ無効な状態であること
 	    it "is invalid without an user_id" do
