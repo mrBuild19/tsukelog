@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @my_posts =  @user.posts.order(created_at: "DESC").page(params[:page]).per(3)
+    @my_posts = @user.posts.order(created_at: "DESC").page(params[:page]).per(3)
     @follow_users = @user.following_user.page(params[:page]).per(3)
     @follower_users = @user.followers_user.page(params[:page]).per(3)
     @like_posts = @user.likes.page(params[:page]).per(3)
@@ -27,11 +27,11 @@ class UsersController < ApplicationController
   end
 
   def update
-		if @user.update(user_params)
-			redirect_to user_path(@user), notice: "ユーザー情報を更新しました。"
-		else
-			render :edit
-		end
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: "ユーザー情報を更新しました。"
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -46,10 +46,11 @@ class UsersController < ApplicationController
     else
       @search = User.where.not(admin: true).ransack(params[:q])
     end
-    @search_users =  @search.result.page(params[:page])
+    @search_users = @search.result.page(params[:page])
   end
 
   private
+
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
