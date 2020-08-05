@@ -148,45 +148,47 @@ RSpec.describe PostsController, type: :controller do
 		end
 	end
 
-	# describe "#update" do
+	describe "#update" do
 
-	# 	# 認可されたユーザーとして
-	# 	context "as an authorized user" do
+		# ログインユーザーとして
+		context "as login user" do
 
-	# 		before do
-	# 			@user = FactoryBot.create(:user)
-	# 		end
+			before do
+				@post = FactoryBot.create(:post)
+				@user = @post.user
+			end
 
-	# 		# プロフィールを更新できること
-	# 		it "updates a profile" do
-	# 			user_params = FactoryBot.attributes_for(:user, name: "名前更新テスト")
-	# 			sign_in @user
-	# 			patch :update, params: { id: @user.id, user: user_params }
-	# 			expect(@user.reload.name).to eq "名前更新テスト"
-	# 		end
-	# 	end
+			# タイトルを更新できること
+			it "updates a post" do
+				post_params = FactoryBot.attributes_for(:post, title: "タイトル更新")
+				sign_in @user
+				patch :update, params: { id: @post.id, post: post_params }
+				expect(@post.reload.title).to eq "タイトル更新"
+			end
+		end
 
-	# 	# ログインしていないユーザーとして
-	# 	context "as not logged in user" do
+		# ログインしていないユーザーとして
+		context "as not logged in user" do
 
-	# 		before do
-	# 			@other_user = FactoryBot.create(:user)
-	# 			@user_params = FactoryBot.attributes_for(:user, name: "名前更新テスト")
-	# 		end
+			before do
+				@post = FactoryBot.create(:post)
+				@other_user = @post.user
+				@post_params = FactoryBot.attributes_for(:post, title: "名前更新テスト")
+			end
 
-	# 		# 302レスポンスを返すこと
-	# 		it "returns a 302 response" do
-	# 			patch :update, params: { id: @other_user.id, user: @user_params }
-	# 			expect(response).to have_http_status "302"
-	# 		end
+			# 302レスポンスを返すこと
+			it "returns a 302 response" do
+				patch :update, params: { id: @post.id, post: @post_params }
+				expect(response).to have_http_status "302"
+			end
 
-	# 		# サインイン画面にリダイレクトすること
-	# 		it "redirects to the sign-in page" do
-	# 			patch :update, params: { id: @other_user.id, user: @user_params }
-	# 			expect(response).to redirect_to "/users/sign_in"
-	# 		end
-	# 	end
-	# end
+			# サインイン画面にリダイレクトすること
+			it "redirects to the sign-in page" do
+				patch :update, params: { id: @post.id, post: @post_params }
+				expect(response).to redirect_to "/users/sign_in"
+			end
+		end
+	end
 
 	# describe "#destroy" do
 
