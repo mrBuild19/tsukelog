@@ -149,6 +149,46 @@ RSpec.describe UsersController, type: :controller do
 		end
 	end
 
+	describe "#update" do
+
+		# 認可されたユーザーとして
+		context "as an authorized user" do
+
+			before do
+				@user = FactoryBot.create(:user)
+			end
+
+			# プロフィールを更新できること
+			it "updates a profile" do
+				user_params = FactoryBot.attributes_for(:user, name: "名前更新テスト")
+				sign_in @user
+				patch :update, params: { id: @user.id, user: user_params }
+				expect(@user.reload.name).to eq "名前更新テスト"
+			end
+		end
+
+		# ログインしていないユーザーとして
+		context "as not logged in user" do
+
+			before do
+				@other_user = FactoryBot.create(:user)
+				@user_params = FactoryBot.attributes_for(:user, name: "名前更新テスト")
+			end
+
+			# 302レスポンスを返すこと
+			it "returns a 302 response" do
+				patch :update, params: { id: @other_user.id, user: @user_params }
+				expect(response).to have_http_status "302"
+			end
+
+			# サインイン画面にリダイレクトすること
+			it "redirects to the sign-in page" do
+				patch :update, params: { id: @other_user.id, user: @user_params }
+				expect(response).to redirect_to "/users/sign_in"
+			end
+		end
+	end
+
 	describe "#search" do
 
 		before do
