@@ -190,50 +190,69 @@ RSpec.describe PostsController, type: :controller do
 		end
 	end
 
-	# describe "#destroy" do
+	describe "#destroy" do
 
-	# 	# 管理者ユーザーとして
-	# 	context "as an admin user" do
+		# ログインユーザーとして
+		context "as login user" do
 
-	# 		before do
-	# 			@admin_user = FactoryBot.create(:user, admin: true)
-	# 		end
+			before do
+				@post = FactoryBot.create(:post)
+				@user = @post.user
+			end
 
-	# 		# 一般ユーザーを対象
-	# 		context "to a general user" do
+			# 自身の投稿を削除できること
+			it "destroies my post" do
+				sign_in @user
+				expect {
+					delete :destroy, params: { id: @post.id }
+				}.to change(Post, :count).by(-1)
+			end
+		end
 
-	# 			# 一般ユーザーを削除できること
-	# 			it "destroies a general user" do
-	# 				user = FactoryBot.create(:user)
-	# 				sign_in @admin_user
-	# 				expect {
-	# 					delete :destroy, params: { id: user.id }
-	# 				}.to change(User, :count).by(-1)
-	# 			end
-	# 		end
+		# 管理者ユーザーとして
+		context "as an admin user" do
 
-	# 		# ゲストユーザーを対象
-	# 		context "to a guest user" do
+			before do
+				@post = FactoryBot.create(:post)
+				@admin_user = FactoryBot.create(:user, admin: true)
+			end
 
-	# 			# ゲストユーザーを削除できないこと
-	# 			it "does not destroy a guest user" do
-	# 				guest_user = FactoryBot.create(:user, email: "guest_user@gmail.com")
-	# 				sign_in @admin_user
-	# 				expect {
-	# 					delete :destroy, params: { id: guest_user }
-	# 				}.to change(User, :count).by(0)
-	# 			end
+			# 他ユーザーの投稿
+			it "destroies other user's post" do
+				sign_in @admin_user
+				expect {
+					delete :destroy, params: { id: @post.id }
+				}.to change(Post, :count).by(-1)
+			end
 
-	# 			# 投稿一覧画面にリダイレクトすること
-	# 			it "redirects to the post-index page" do
-	# 				guest_user = FactoryBot.create(:user, email: "guest_user@gmail.com")
-	# 				sign_in @admin_user
-	# 				delete :destroy, params: { id: guest_user }
-	# 				expect(response).to redirect_to "/posts"
-	# 			end
-	# 		end
-	# 	end
-	# end
+			# リダイレクト先が投稿一覧画面であること
+			it "redirects to the post-index page" do
+				sign_in @admin_user
+				delete :destroy, params: { id: @post.id }
+				expect(response).to redirect_to "/posts"
+			end
+		end
+
+		# ログインしていないユーザーとして
+		context "as not logged in user" do
+
+			before do
+				@post = FactoryBot.create(:post)
+			end
+
+			# 302レスポンスを返すこと
+			it "returns a 302 response" do
+				delete :destroy, params: { id: @post.id }
+				expect(response).to have_http_status "302"
+			end
+
+			# サインイン画面にリダイレクトすること
+			it "redirects to the sign-in page" do
+				delete :destroy, params: { id: @post.id }
+				expect(response).to redirect_to "/users/sign_in"
+			end
+		end
+	end
 
 	describe "#search" do
 
