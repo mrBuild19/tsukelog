@@ -26,50 +26,54 @@ RSpec.describe PostsController, type: :controller do
 
 	describe "#show" do
 
-		# 自身の投稿
-		context "my post" do
+		# ログインユーザーとして
+		context "as login user" do
 
-			before do
-				@post = FactoryBot.create(:post)
-				@user = @post.user
+			# 自身の投稿
+			context "my post" do
+
+				before do
+					@post = FactoryBot.create(:post)
+					@user = @post.user
+				end
+
+				# 正常にレスポンスを返すこと
+				it "responds successfully" do
+					sign_in @user
+					get :show, params: { id: @post.id }
+					expect(response).to be_success
+				end
+
+				# 200レスポンスを返すこと
+				it "returns a 200 response" do
+					sign_in @user
+					get :show, params: { id: @post.id }
+					expect(response).to have_http_status "200"
+				end
 			end
 
-			# 正常にレスポンスを返すこと
-			it "responds successfully" do
-				sign_in @user
-				get :show, params: { id: @post.id }
-				expect(response).to be_success
-			end
+			# 他のユーザーの投稿
+			context "other user's post" do
 
-			# 200レスポンスを返すこと
-			it "returns a 200 response" do
-				sign_in @user
-				get :show, params: { id: @post.id }
-				expect(response).to have_http_status "200"
-			end
-		end
+				before do
+					@user = FactoryBot.create(:user)
+					@post = FactoryBot.create(:post)
+					@other_user = @post.user
+				end
 
-		# 他のユーザーの投稿
-		context "other user's post" do
+				# 正常にレスポンスを返すこと
+				it "responds successfully" do
+					sign_in @user
+					get :show, params: { id: @post.id }
+					expect(response).to be_success
+				end
 
-			before do
-				@user = FactoryBot.create(:user)
-				@post = FactoryBot.create(:post)
-				@other_user = @post.user
-			end
-
-			# 正常にレスポンスを返すこと
-			it "responds successfully" do
-				sign_in @user
-				get :show, params: { id: @post.id }
-				expect(response).to be_success
-			end
-
-			# 200レスポンスを返すこと
-			it "returns a 200 response" do
-				sign_in @user
-				get :show, params: { id: @post.id }
-				expect(response).to have_http_status "200"
+				# 200レスポンスを返すこと
+				it "returns a 200 response" do
+					sign_in @user
+					get :show, params: { id: @post.id }
+					expect(response).to have_http_status "200"
+				end
 			end
 		end
 
@@ -96,26 +100,30 @@ RSpec.describe PostsController, type: :controller do
 
 	describe "#edit" do
 
-		# 認可されたユーザーとして
-		context "as an authorized user" do
+		# ログインユーザーとして
+		context "as login user" do
 
-			before do
-				@post = FactoryBot.create(:post)
-				@user = @post.user
-			end
+			# 自身の投稿
+			context "my post" do
 
-			# 正常にレスポンスを返すこと
-			it "responds successfully" do
-				sign_in @user
-				get :edit, params: { id: @post.id }
-				expect(response).to be_success
-			end
+				before do
+					@post = FactoryBot.create(:post)
+					@user = @post.user
+				end
 
-			# 200レスポンスを返すこと
-			it "returns a 200 response" do
-				sign_in @user
-				get :edit, params: { id: @post.id }
-				expect(response).to have_http_status "200"
+				# 正常にレスポンスを返すこと
+				it "responds successfully" do
+					sign_in @user
+					get :edit, params: { id: @post.id }
+					expect(response).to be_success
+				end
+
+				# 200レスポンスを返すこと
+				it "returns a 200 response" do
+					sign_in @user
+					get :edit, params: { id: @post.id }
+					expect(response).to have_http_status "200"
+				end
 			end
 		end
 
