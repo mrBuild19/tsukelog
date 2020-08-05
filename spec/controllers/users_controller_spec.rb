@@ -189,6 +189,51 @@ RSpec.describe UsersController, type: :controller do
 		end
 	end
 
+	describe "#destroy" do
+
+		# 管理者ユーザーとして
+		context "as an admin user" do
+
+			before do
+				@admin_user = FactoryBot.create(:user, admin: true)
+			end
+
+			# 一般ユーザーを対象
+			context "to a general user" do
+
+				# 一般ユーザーを削除できること
+				it "destroies a general user" do
+					user = FactoryBot.create(:user)
+					sign_in @admin_user
+					expect {
+						delete :destroy, params: { id: user.id }
+					}.to change(User, :count).by(-1)
+				end
+			end
+
+			# ゲストユーザーを対象
+			context "to a guest user" do
+
+				# ゲストユーザーを削除できないこと
+				it "does not destroy a guest user" do
+					guest_user = FactoryBot.create(:user, email: "guest_user@gmail.com")
+					sign_in @admin_user
+					expect {
+						delete :destroy, params: { id: guest_user }
+					}.to change(User, :count).by(0)
+				end
+
+				# 投稿一覧画面にリダイレクトすること
+				it "redirects to the post-index page" do
+					guest_user = FactoryBot.create(:user, email: "guest_user@gmail.com")
+					sign_in @admin_user
+					delete :destroy, params: { id: guest_user }
+					expect(response).to redirect_to "/posts"
+				end
+			end
+		end
+	end
+
 	describe "#search" do
 
 		before do
