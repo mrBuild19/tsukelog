@@ -94,6 +94,63 @@ RSpec.describe PostsController, type: :controller do
 		end
 	end
 
+	describe "#create" do
+
+		# ログインユーザーとして
+		context "as login user" do
+
+			before do
+				@user = FactoryBot.create(:user)
+			end
+
+			# 有効な属性の場合
+			context "with valid attributes" do
+
+				# 投稿できること
+				it "adds a post" do
+					post_params = FactoryBot.attributes_for(:post)
+					sign_in @user
+					expect {
+						post :create, params: { post: post_params }
+					}.to change(@user.posts, :count).by(1)
+				end
+			end
+
+			# 無効な属性の場合
+			context "with invalid attributes" do
+
+				# 投稿できないこと
+				it "does not add a post" do
+					post_params = FactoryBot.attributes_for(:post, title: nil)
+					sign_in @user
+					expect {
+						post :create, params: { post: post_params }
+					}.to_not change(@user.posts, :count)
+				end
+			end
+		end
+
+		# ログインしていないユーザーとして
+		context "as not logged in user" do
+
+			before do
+				@post_params = FactoryBot.attributes_for(:post)
+			end
+
+			# 302レスポンスを返すこと
+			it "returns a 302 response" do
+				post :create, params: { post: @post_params }
+				expect(response).to have_http_status "302"
+			end
+
+			# サインイン画面にリダイレクトすること
+			it "redirects to the sign-in page" do
+				post :create, params: { post: @post_params }
+				expect(response).to redirect_to "/users/sign_in"
+			end
+		end
+	end
+
 	describe "#show" do
 
 		# ログインユーザーとして
