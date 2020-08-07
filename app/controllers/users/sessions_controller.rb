@@ -18,6 +18,12 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def guest_login
+    user = User.guest
+    sign_in user
+    redirect_to posts_path, notice: "ゲストユーザーとしてログインしました。"
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -25,12 +31,12 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
-  #ログイン後のリダイレクト先
+  # ログイン後のリダイレクト先
   def after_sign_in_path_for(resource)
     posts_path
   end
 
-  #ログアウト後のリダイレクト先
+  # ログアウト後のリダイレクト先
   def after_sign_out_path_for(resource)
     root_path
   end

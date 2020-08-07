@@ -40,7 +40,7 @@ User.create!(name:  "テツヤ",
              password_confirmation: "eeeeee",
              admin: false)
 
-User.create!(name:  "柴田",
+User.create!(name:  "シバタ",
              email: "sibata@gmail.com",
              password:  "ffffff",
              password_confirmation: "ffffff",
@@ -50,7 +50,7 @@ User.create!(name:  "としみつ",
              password:  "gggggg",
              password_confirmation: "gggggg",
              admin: false)
-User.create!(name:  "ムシ",
+User.create!(name:  "ムシメガネ",
              email: "mushi@gmail.com",
              password:  "hhhhhh",
              password_confirmation: "hhhhhh",
@@ -113,8 +113,15 @@ User.create!(name:  "ナイスガイ",
              password:  "ssssss",
              password_confirmation: "ssssss",
              admin: false)
-User.create!(name:  "福良",
+User.create!(name:  "福良P",
              email: "hukura@gmail.com",
              password:  "tttttt",
              password_confirmation: "tttttt",
+             admin: false)
+
+# ゲストユーザー
+User.create!(name:  "ゲストユーザー",
+             email: "guest_user@gmail.com",
+             password:  "guest_user",
+             password_confirmation: "guest_user",
              admin: false)

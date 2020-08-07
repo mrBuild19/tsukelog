@@ -41,6 +41,7 @@ https://tsukelog.work
   - MySQL 5.7.22
 - インフラ・開発環境等
   - AWS(VPC, EC2, RDS, Route53, ACM, ALB)
+  - Rspec
   - Git, GitHub
 
 ## 実装機能
