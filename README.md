@@ -69,11 +69,11 @@ https://tsukelog.work
 - WBS
   - https://docs.google.com/spreadsheets/d/1oEjWowxaD3P-YHIjm9f-07QUaVsOr9JGKVei-0qPmZI/edit#gid=977420151
 - ER図
-  - https://app.diagrams.net/#G1-y_ygBNCyokbqHa57_0u0DJ7XCQmv1Uf
+  - https://drive.google.com/file/d/1-y_ygBNCyokbqHa57_0u0DJ7XCQmv1Uf/view?usp=sharing
 - ワイヤフレーム
-  - https://app.diagrams.net/#G15jO0eCRYkS1tfds-iSgeHsBPcoHRJM-m
+  - https://drive.google.com/file/d/15jO0eCRYkS1tfds-iSgeHsBPcoHRJM-m/view?usp=sharing
 - アプリケーション詳細設計書
-  - https://docs.google.com/spreadsheets/d/1I7d70L-ojFS4-WMrerJc0RCX2BlJYH3f/edit#gid=694103975
+  - https://drive.google.com/file/d/1I7d70L-ojFS4-WMrerJc0RCX2BlJYH3f/view?usp=sharing
 
 ### 機能一覧
 https://docs.google.com/spreadsheets/d/1fZPCcORw_R6TglglHcL1YGHa30Yy2H-cwxbZXJY4m1M/edit#gid=0
