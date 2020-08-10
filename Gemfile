@@ -74,6 +74,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7.0'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 4.10.0'
+  gem 'capybara', '~> 2.15.2'
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano3-puma'
