@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Homes", type: :feature do
 
-  feature 'Render right templates' do
+  feature 'Check Templates' do
 
     scenario 'Home' do
       visit root_path
@@ -15,12 +15,12 @@ RSpec.feature "Homes", type: :feature do
     end
   end
 
-  feature 'Have right links' do
+  feature 'Check Links' do
     background do
       visit root_path
     end
 
-    scenario 'Header(bofore login)' do
+    scenario 'Check Header(bofore login)' do
       expect(page).to have_content "つけログ"
       expect(find(".search")[:href]).to eq search_posts_path
       expect(find(".users")[:href]).to eq users_path
@@ -29,7 +29,7 @@ RSpec.feature "Homes", type: :feature do
       expect(page).to have_link "新規登録"
     end
 
-    scenario 'Header(after login)' do
+    scenario 'Check Header(after login)' do
 
       user = FactoryBot.create(:user)
 
