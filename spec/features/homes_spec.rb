@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Homes", type: :feature do
-
   feature 'Check Templates' do
-
     scenario 'Home' do
       visit root_path
       expect(page).to have_http_status "200"
@@ -30,7 +28,6 @@ RSpec.feature "Homes", type: :feature do
     end
 
     scenario 'Check Header(after login)' do
-
       user = FactoryBot.create(:user)
 
       click_link "ログイン"
