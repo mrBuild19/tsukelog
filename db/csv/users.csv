@@ -1,0 +1,13 @@
+name,email,password,password_confirmation,admin
+admin,admin@gmail.com,mastercode,mastercode,true
+ゲストユーザー,guest_user@gmail.com,guest_user,guest_user,false
+テツヤ,tetsuya@gmail.com,aaaaaa,aaaaaa,false
+シバタ,sibata@gmail.com,bbbbbb,bbbbbb,false
+としみつ,toshimitu@gmail.com,cccccc,cccccc,false
+ムシメガネ,mushi@gmail.com,dddddd,dddddd,false
+りょう,ryou@gmail.com,eeeeee,eeeeee,false
+ゆめまる,yumemaru@gmail.com,ffffff,ffffff,false
+ささぼー,sasabo@gmail.com,gggggg,gggggg,false
+ちゃんなべ,nabe@gmail.com,hhhhhh,hhhhhh,false
+おっしー,oshi@gmail.com,iiiiii,iiiiii,false
+カンタ,kanta@gmail.com,jjjjjj,jjjjjj,false
